@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Ruxsatlar</h3>
-                        <a href="{{ route('permissions.create') }}" class="btn btn-success btn-sm float-right">
+                        <a href="{{ route('adminpermissions.create') }}" class="btn btn-success btn-sm float-right">
                             <span class="fas fa-plus-circle"></span>
                             Qo'shish
                         </a>
@@ -56,10 +56,10 @@
                                         @endforeach
                                     </td>
                                     <td class="text-center">
-                                        <form action="{{ route('permissions.destroy',$permission->id) }}" method="post">
+                                        <form action="{{ route('adminpermissions.destroy',$permission->id) }}" method="post">
                                             @csrf
                                             <div class="btn-group">
-                                                <a href="{{ route('permissions.edit',$permission->id) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                                                <a href="{{ route('adminpermissions.edit',$permission->id) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
 {{--                                                @can('permission.edit')--}}
 {{--                                                @endcan--}}
                                                 <input name="_method" type="hidden" value="DELETE">

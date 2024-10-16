@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Bosh sahifa</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('index') }}">Bosh sahifa</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('adminpermissions.index') }}">Ruxsatlar</a></li>
                         <li class="breadcrumb-item active">Qo'shish</li>
                     </ol>

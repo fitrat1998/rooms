@@ -6,7 +6,7 @@
         @canany(['permission.show', 'roles.show', 'user.show'])
             <li class="nav-item has-treeview ">
                 <a href="#"
-                   class="nav-link {{ Request::is('permission*') || Request::is('role*') || Request::is('user*') ? 'active' : '' }}">
+                   class="nav-link {{ Request::is('adminpermissions*') || Request::is('role*') || Request::is('user*') ? 'active' : '' }}">
                     <i class="fas fa-users-cog"></i>
                     <p>
                         Tuzilma
@@ -17,8 +17,8 @@
                     style="display: {{ Request::is('permission*') || Request::is('role*') || Request::is('user*') ? 'block' : 'none' }};">
                     @can('permission.show')
                         <li class="nav-item">
-                            <a href="{{ route('permissions.index') }}"
-                               class="nav-link {{ Request::is('permission*') ? 'active' : '' }}">
+                            <a href="{{ route('adminpermissions.index') }}"
+                               class="nav-link {{ Request::is('adminpermissions*') ? 'active' : '' }}">
                                 <i class="fas fa-key"></i>
                                 <p>Ruxsatlar</p>
                             </a>
