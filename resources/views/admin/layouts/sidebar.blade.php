@@ -47,7 +47,45 @@
                 </ul>
 
             </li>
+
+
+             <li class="nav-item has-treeview ">
+                <a href="#"
+                   class="nav-link {{ Request::is('adminpermissions*') || Request::is('role*') || Request::is('user*') ? 'active' : '' }}">
+                    <i class="fas fa-users-cog"></i>
+                    <p>
+                        Turar joy
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview"
+                    style="display: {{ Request::is('permission*') || Request::is('role*') || Request::is('user*') ? 'block' : 'none' }};">
+
+                    @can('permission.show')
+                        <li class="nav-item">
+                            <a href="{{ route('buildings.index') }}"
+                               class="nav-link {{ Request::is('buildings*') ? 'active' : '' }}">
+                                <i class="fas fa-key"></i>
+                                <p>Binolar</p>
+                            </a>
+                        </li>
+                    @endcan
+
+                     @can('permission.show')
+                        <li class="nav-item">
+                            <a href="{{ route('rooms.index') }}"
+                               class="nav-link {{ Request::is('rooms*') ? 'active' : '' }}">
+                                <i class="fas fa-key"></i>
+                                <p>Xonalar</p>
+                            </a>
+                        </li>
+                    @endcan
+
+                </ul>
+
+            </li>
         @endcanany
+
 
 
 

@@ -340,6 +340,37 @@
 </script>
 
 
+ <script>
+        $(document).ready(function() {
+            $('#building').change(function() {
+                var buildingId = $(this).val();
+
+                alert(buildingId)
+
+                if (buildingId) {
+                    $.ajax({
+                        url: 'buildings/show/' + buildingId,
+                        type: 'GET',
+                        success: function(data) {
+
+                            console.log()
+
+                            $('#floors').empty();
+                            $('#floors').append('<option value="">Qavatni tanlang</option>');
+
+                            $.each(data, function(key, value) {
+                                $('#floors').append('<option value="' + key + '">' + value + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#floors').empty();
+                    $('#floors').append('<option value="">Avval binoni tanlang</option>');
+                }
+            });
+        });
+    </script>
+
 
 
 </body>
