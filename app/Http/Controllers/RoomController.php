@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Building;
+use App\Models\Floor;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
@@ -41,9 +42,13 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show($id)
     {
-        //
+        $id = intval($id);
+
+        $floors = Floor::where('building_id',$id)->get();
+
+        return response()->json($floors);
     }
 
     /**

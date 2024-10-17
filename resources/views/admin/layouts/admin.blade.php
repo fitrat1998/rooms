@@ -347,26 +347,27 @@
 
                 alert(buildingId)
 
-                if (buildingId) {
-                    $.ajax({
-                        url: 'buildings/show/' + buildingId,
-                        type: 'GET',
-                        success: function(data) {
+              if (buildingId) {
+    $.ajax({
+        url: '/show/' + buildingId,
+        type: 'GET',
+        success: function(data) {
+            console.log(data); // Bu yerda ma'lumotlarni konsolga chiqarish
+            $('#floors').empty();
+            $('#floors').append('<option value="">Qavatni tanlang</option>');
+            $.each(data, function(key, value) {
+                $('#floors').append('<option value="' + key + '">' + value + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error: " + status + error);
+        }
+    });
+} else {
+    $('#floors').empty();
+    $('#floors').append('<option value="">Avval binoni tanlang</option>');
+}
 
-                            console.log()
-
-                            $('#floors').empty();
-                            $('#floors').append('<option value="">Qavatni tanlang</option>');
-
-                            $.each(data, function(key, value) {
-                                $('#floors').append('<option value="' + key + '">' + value + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#floors').empty();
-                    $('#floors').append('<option value="">Avval binoni tanlang</option>');
-                }
             });
         });
     </script>
