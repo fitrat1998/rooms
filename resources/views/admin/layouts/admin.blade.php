@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
     <link rel="stylesheet" href="{{   asset('plugins/toastr/toastr.min.css')}}">
     <link rel="stylesheet" href="../plugins/fullcalendar/main.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
     <!-- Bootstrap CSS -->
@@ -65,7 +66,11 @@
             flex: 1;
 
         @media (max-width: 768px) {
-            font-size:  12px  ;
+            font-size:
+
+        12px
+
+        ;
         }
 
         }
@@ -277,8 +282,8 @@
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
- <script src="../plugins/fullcalendar/main.js"></script>
-
+<script src="../plugins/fullcalendar/main.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 
 <script src="{{ asset('plugins/my/self.js')}}"></script>
@@ -340,37 +345,88 @@
 </script>
 
 
- <script>
-        $(document).ready(function() {
-            $('#building').change(function() {
-                var buildingId = $(this).val();
+<script>
+    $(document).ready(function () {
+        $('#building').change(function () {
+            var currentFloorId = {{ isset($room) ? $room->floor->id : 'null' }};
+            var buildingId = $(this).val();
+            var url = '{{ route("buildings.show", ":id") }}';
+            url = url.replace(':id', buildingId);
 
-                alert(buildingId)
+            if (buildingId) {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                        console.log(data); // Ma'lumotlarni konsolga chiqarish
+                        $('#floors').empty();
+                        $('#floors').append('<option value="">Qavatni tanlang</option>');
+                        $.each(data, function (key, floor) {
+                            var selected = floor.id == currentFloorId ? 'selected' : '';
+                            $('#floors').append('<option value="' + floor.id + '" ' + selected + '>' + floor.number + '</option>');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error: " + status + error);
+                    }
+                });
+            } else {
+                $('#floors').empty();
+                $('#floors').append('<option value="">Avval binoni tanlang</option>');
+            }
 
-              if (buildingId) {
-    $.ajax({
-        url: '/show/' + buildingId,
-        type: 'GET',
-        success: function(data) {
-            console.log(data); // Bu yerda ma'lumotlarni konsolga chiqarish
-            $('#floors').empty();
-            $('#floors').append('<option value="">Qavatni tanlang</option>');
-            $.each(data, function(key, value) {
-                $('#floors').append('<option value="' + key + '">' + value + '</option>');
+
+        });
+    });
+</script>
+
+
+<script>
+ $(document).ready(function() {
+    $('input[name="visa"]').change(function() {
+        if ($('#visa_yes').is(':checked')) {
+            $('#period_group').show();
+            $('input[name="visa_period"]').datepicker({
+                dateFormat: 'dd-mm-yy'
             });
-        },
-        error: function(xhr, status, error) {
-            console.error("AJAX Error: " + status + error);
+        } else {
+            $('#period_group').hide();
         }
     });
-} else {
-    $('#floors').empty();
-    $('#floors').append('<option value="">Avval binoni tanlang</option>');
-}
 
+    $('input[name="reg"]').change(function() {
+        if ($('#reg_yes').is(':checked')) {
+            $('#reg_period_group').show();
+            $('input[name="reg_period"]').datepicker({
+                dateFormat: 'dd-mm-yy'
             });
+        } else {
+            $('#reg_period_group').hide();
+        }
+    });
+
+    // To ensure the correct state on page load if old value is set
+    if ($('#visa_yes').is(':checked')) {
+        $('#period_group').show();
+        $('input[name="visa_period"]').datepicker({
+            dateFormat: 'dd-mm-yy'
         });
-    </script>
+    } else {
+        $('#period_group').hide();
+    }
+
+    if ($('#reg_yes').is(':checked')) {
+        $('#reg_period_group').show();
+        $('input[name="reg_period"]').datepicker({
+            dateFormat: 'dd-mm-yy'
+        });
+    } else {
+        $('#reg_period_group').hide();
+    }
+});
+
+
+</script>
 
 
 

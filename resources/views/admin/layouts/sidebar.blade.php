@@ -49,7 +49,7 @@
             </li>
 
 
-             <li class="nav-item has-treeview ">
+            <li class="nav-item has-treeview ">
                 <a href="#"
                    class="nav-link {{ Request::is('adminpermissions*') || Request::is('role*') || Request::is('user*') ? 'active' : '' }}">
                     <i class="fas fa-users-cog"></i>
@@ -71,7 +71,7 @@
                         </li>
                     @endcan
 
-                     @can('permission.show')
+                    @can('permission.show')
                         <li class="nav-item">
                             <a href="{{ route('rooms.index') }}"
                                class="nav-link {{ Request::is('rooms*') ? 'active' : '' }}">
@@ -84,9 +84,44 @@
                 </ul>
 
             </li>
+
+            <li class="nav-item has-treeview ">
+                <a href="#"
+                   class="nav-link {{ Request::is('guests*') || Request::is('role*') || Request::is('user*') ? 'active' : '' }}">
+                    <i class="fas fa-users-cog"></i>
+                    <p>
+                        Mehmonlar
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+                <ul class="nav nav-treeview"
+                    style="display: {{ Request::is('guests*') || Request::is('role*') || Request::is('user*') ? 'block' : 'none' }};">
+
+                    @can('permission.show')
+                        <li class="nav-item">
+                            <a href="{{ route('guests.index') }}"
+                               class="nav-link {{ Request::is('guests*') ? 'active' : '' }}">
+                                <i class="fas fa-key"></i>
+                                <p>Mehmonlar</p>
+                            </a>
+                        </li>
+                    @endcan
+
+                     @can('permission.show')
+                        <li class="nav-item">
+                            <a href="{{ route('citizenships.index') }}"
+                               class="nav-link {{ Request::is('citizenships*') ? 'active' : '' }}">
+                                <i class="fas fa-key"></i>
+                                <p>Mamlakatlar</p>
+                            </a>
+                        </li>
+                    @endcan
+
+
+                </ul>
+            </li>
         @endcanany
-
-
 
 
     </ul>

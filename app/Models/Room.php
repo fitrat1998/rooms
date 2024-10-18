@@ -15,4 +15,10 @@ class Room extends Model
         'beds',
         'comment',
     ];
+
+
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class);
+    }
 }

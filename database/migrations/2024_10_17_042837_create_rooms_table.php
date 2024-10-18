@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('number');
             $table->integer('beds');
             $table->text('comment');
-            $table->text('photo');
+            $table->text('status');
             $table->timestamps();
 
               $table->foreign('floor_id')

@@ -31,33 +31,76 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <form action="{{ route('buildings.update',$building->id) }}" method="post">
+                        <form action="{{ route('rooms.update',$room->id) }}" method="post">
                             @csrf
                             @method('PUT')
 
+
                             <div class="form-group">
-                                <label>Nomi</label>
-                                <input type="text" name="name"
-                                       class="form-control {{ $errors->has('name') ? "is-invalid":"" }}"
-                                       value="{{ old('name',$building->name) }}" required>
-                                @if($errors->has('name'))
-                                    <span class="error invalid-feedback">{{ $errors->first('name') }}</span>
+                                <label>Bino tanlang</label>
+                                <select id="building" name="building" class="form-control" required>
+                                    <option value="">Bino tanlang</option>
+                                    @foreach($buildings as $building)
+                                        <option
+                                            value="{{ $building->id }}" {{ $building->id == $room->floor->building_id ? 'selected' : '' }}>
+                                            {{ $building->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Qavat</label>
+                                <select id="floors" name="floors" class="form-control" required id="floors">
+                                    <option value="">Avval binoni tanlang</option>
+                                    @foreach($floors as $floor)
+                                        <option
+                                            value="{{ $floor->id }}" {{ $floor->id == $room->floor->id ? 'selected' : '' }}>
+                                            {{ $floor->number }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Xona raqami</label>
+                                <input type="number" name="rooms"
+                                       class="form-control {{ $errors->has('floors') ? "is-invalid":"" }}"
+                                       value="{{ old('rooms',$room->number) }}" required>
+                                @if($errors->has('rooms'))
+                                    <span class="error invalid-feedback">{{ $errors->first('rooms') }}</span>
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                <label>Nomi</label>
-                                <input type="number" name="floors"
+                                <label>Joylar soni</label>
+                                <input type="number" name="beds"
                                        class="form-control {{ $errors->has('floors') ? "is-invalid":"" }}"
-                                       value="{{ old('floors',$floor) }}" required>
-                                @if($errors->has('floors'))
-                                    <span class="error invalid-feedback">{{ $errors->first('floors') }}</span>
+                                       value="{{ old('beds',$room->beds) }}" required>
+                                @if($errors->has('beds'))
+                                    <span class="error invalid-feedback">{{ $errors->first('beds') }}</span>
                                 @endif
                             </div>
+
+                            <div class="form-group">
+                                <label>Izoh (majburiy emas)</label>
+                                <textarea name="comment"
+                                          class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">
+                                    {{ old('comment',$room->comment) }}
+                                </textarea>
+                                @if($errors->has('comment'))
+                                    <span class="error invalid-feedback">{{ $errors->first('comment') }}</span>
+                                @endif
+
+                            </div>
+
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success float-right">Saqlash</button>
-                                <a href="{{ route('buildings.index') }}" class="btn btn-danger float-left">Bekor qilish</a>
+                                <a href="{{ route('buildings.index') }}" class="btn btn-danger float-left">Bekor
+                                    qilish</a>
                             </div>
                         </form>
 

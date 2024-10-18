@@ -28,7 +28,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="{{ route('buildings.store') }}" method="post">
+                        <form action="{{ route('rooms.store') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label>Bino tanlang</label>
@@ -39,6 +39,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label>Qavatlar soni</label>
                                 <select id="floors" name="floors" class="form-control" required id="floors">
@@ -46,9 +47,42 @@
                                     <!-- AJAX orqali yuklanadi -->
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Xona raqami</label>
+                                <input type="number" name="rooms"
+                                       class="form-control {{ $errors->has('floors') ? "is-invalid":"" }}"
+                                       value="{{ old('rooms') }}" required>
+                                @if($errors->has('rooms'))
+                                    <span class="error invalid-feedback">{{ $errors->first('rooms') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label>Joylar soni</label>
+                                <input type="number" name="beds"
+                                       class="form-control {{ $errors->has('floors') ? "is-invalid":"" }}"
+                                       value="{{ old('beds') }}" required>
+                                @if($errors->has('beds'))
+                                    <span class="error invalid-feedback">{{ $errors->first('beds') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label>Izoh (majburiy emas)</label>
+                                <textarea name="comment" id="" class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">
+                                    {{ old('comment') }}
+                                </textarea>
+                                @if($errors->has('comment'))
+                                    <span class="error invalid-feedback">{{ $errors->first('comment') }}</span>
+                                @endif
+
+                            </div>
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success float-right">Saqlash</button>
-                                <a href="{{ route('buildings.index') }}" class="btn btn-danger float-left">Bekor qilish</a>
+                                <a href="{{ route('buildings.index') }}" class="btn btn-danger float-left">Bekor
+                                    qilish</a>
                             </div>
                         </form>
                     </div>

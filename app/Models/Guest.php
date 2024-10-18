@@ -14,4 +14,9 @@ class Guest extends Model
         'citizenship_id',
         'passport_number',
     ];
+
+    public function citizenship()
+    {
+        return $this->belongsTo(Citizenship::class, 'citizenship_id');
+    }
 }

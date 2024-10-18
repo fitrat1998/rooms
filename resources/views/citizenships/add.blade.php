@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Bino</h1>
+                    <h1>Davlat</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('index') }}">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Binolar</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('citizenships.index') }}">Binolar</a></li>
                         <li class="breadcrumb-item active">Qo'shish</li>
                     </ol>
                 </div>
@@ -31,10 +31,10 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <form action="{{ route('guests.store') }}" method="post">
+                        <form action="{{ route('citizenships.store') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label>Fish</label>
+                                <label>Nomi</label>
                                 <input type="text" name="name"
                                        class="form-control {{ $errors->has('name') ? "is-invalid":"" }}"
                                        value="{{ old('name') }}" required>
@@ -43,29 +43,10 @@
                                 @endif
                             </div>
 
-                            <div class="form-group">
-                                <label>Fuqaroligi</label>
-                                <select name="citizenship" class="form-control" required id="citizenship">
-                                    <option value="">davlatni tanlang</option>
-                                    @foreach($citizenships as $citizenship)
-                                        <option value="{{ $citizenship->id }}">{{ $citizenship->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Passport raqami</label>
-                                <input type="text" name="passport"
-                                       class="form-control {{ $errors->has('passport') ? "is-invalid":"" }}"
-                                       value="{{ old('passport') }}" required>
-                                @if($errors->has('passport'))
-                                    <span class="error invalid-feedback">{{ $errors->first('passport') }}</span>
-                                @endif
-                            </div>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success float-right">Saqlash</button>
-                                <a href="{{ route('guests.index') }}" class="btn btn-danger float-left">Bekor qilish</a>
+                                <a href="{{ route('citizenships.index') }}" class="btn btn-danger float-left">Bekor qilish</a>
                             </div>
                         </form>
 

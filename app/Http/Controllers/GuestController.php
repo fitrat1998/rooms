@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Citizenship;
 use App\Models\Guest;
 use App\Http\Requests\StoreGuestRequest;
 use App\Http\Requests\UpdateGuestRequest;
@@ -13,7 +14,9 @@ class GuestController extends Controller
      */
     public function index()
     {
-        //
+        $guests = Guest::all();
+
+        return view('guests.index', compact('guests'));
     }
 
     /**
@@ -21,7 +24,9 @@ class GuestController extends Controller
      */
     public function create()
     {
-        //
+        $citizenships = Citizenship::all();
+
+        return view('guests.add', compact('citizenships'));
     }
 
     /**
@@ -29,7 +34,13 @@ class GuestController extends Controller
      */
     public function store(StoreGuestRequest $request)
     {
-        //
+        $guest = Guest::create([
+            'fullname' => $request->name,
+            'citizenship_id' => $request->citizenship,
+            'passport_number' => $request->passport
+        ]);
+
+        return redirect()->route('guests.index')->with('success', 'Mehmon muvaffaqiyatli qo`shildi');
     }
 
     /**
@@ -43,24 +54,41 @@ class GuestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Guest $guest)
+    public function edit($id)
     {
-        //
+        $citizenships = Citizenship::all();
+
+        $guest = Guest::find($id);
+
+        return view('guests.edit', compact('citizenships', 'guest'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGuestRequest $request, Guest $guest)
+    public function update(UpdateGuestRequest $request, $id)
     {
-        //
+        $guest = Guest::find($id);
+
+        $guest->update([
+            'fullname' => $request->name,
+            'citizenship_id' => $request->citizenship,
+            'passport_number' => $request->passport
+        ]);
+
+        return redirect()->route('guests.index')->with('success', 'Mehmon muvaffaqiyatli tahrirlandi');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Guest $guest)
+    public function destroy($id)
     {
-        //
+        $guest = Guest::find($id);
+
+        $guest->delete();
+
+        return redirect()->route('guests.index')->with('success', 'Mehmon muvaffaqiyatli o`chirildi');
+
     }
 }

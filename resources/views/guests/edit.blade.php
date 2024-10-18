@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('index') }}">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Foydalanuvchi</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('guests.index') }}">Mehmon</a></li>
                         <li class="breadcrumb-item active">Tahrirlash</li>
                     </ol>
                 </div>
@@ -31,52 +31,46 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <form action="{{ route('users.update',$user->id) }}" method="post">
+                        <form action="{{ route('guests.update',$guest->id) }}" method="post">
                             @csrf
                             @method('PUT')
+
                             <div class="form-group">
                                 <label>Fish</label>
                                 <input type="text" name="name"
                                        class="form-control {{ $errors->has('name') ? "is-invalid":"" }}"
-                                       value="{{ old('name',$user->name) }}" required>
+                                       value="{{ old('name',$guest->fullname) }}" required>
                                 @if($errors->has('name'))
                                     <span class="error invalid-feedback">{{ $errors->first('name') }}</span>
                                 @endif
                             </div>
+
                             <div class="form-group">
-                                <label>Login</label>
-                                <input type="login" name="login"
-                                       class="form-control {{ $errors->has('login') ? "is-invalid":"" }}"
-                                       value="{{ old('login',$user->login) }}" required>
-                                @if($errors->has('login'))
-                                    <span class="error invalid-feedback">{{ $errors->first('login') }}</span>
+                                <label>Fuqaroligi</label>
+                                <select name="citizenship" class="form-control" required id="citizenship">
+                                    <option value="">davlatni tanlang</option>
+                                    @foreach($citizenships as $citizenship)
+                                        <option
+                                            value="{{ $citizenship->id }}" {{ $citizenship->id == $guest->citizenship_id ? 'selected' : '' }}>
+                                            {{ $citizenship->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Passport raqami</label>
+                                <input type="text" name="passport"
+                                       class="form-control {{ $errors->has('passport') ? "is-invalid":"" }}"
+                                       value="{{ old('passport',$guest->passport_number) }}" required>
+                                @if($errors->has('passport'))
+                                    <span class="error invalid-feedback">{{ $errors->first('passport') }}</span>
                                 @endif
                             </div>
 
-                            <label>Parol</label>
-                            <div class="form-group">
-                                <input type="password" name="password" id="password-field"
-                                       class="form-control {{ $errors->has('password') ? "is-invalid":"" }}">
-                                <span toggle="#password-field"
-                                      class="fa fa-fw fa-eye toggle-password field-icon"></span>
-                                @if($errors->has('password'))
-                                    <span class="error invalid-feedback">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label>Parolni tasdiqlash</label>
-                                <input id="password-confirm" type="password" class="form-control"
-                                       name="password_confirmation" autocomplete="new-password">
-                                <span toggle="#password-confirm"
-                                      class="fa fa-fw fa-eye toggle-password field-icon"></span>
-                                @if($errors->has('password_confirmation'))
-                                    <span
-                                        class="error invalid-feedback">{{ $errors->first('password_confirmation') }}</span>
-                                @endif
-                            </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success float-right">Saqlash</button>
-                                <a href="{{ route('users.index') }}" class="btn btn-danger float-left">Bekor qilish</a>
+                                <a href="{{ route('guests.index') }}" class="btn btn-danger float-left">Bekor qilish</a>
                             </div>
                         </form>
 

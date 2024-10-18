@@ -36,7 +36,17 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request)
     {
-        //
+//        dd($request);
+
+        $room = Room::create([
+            'floor_id' => $request->floors,
+            'number'   => $request->rooms,
+            'beds'     => $request->beds,
+            'comment'  => $request->comment ?? 'mavjud emas',
+        ]);
+
+
+        return redirect()->route('rooms.index')->with('success','Xona muvaffaqiyatli qo`shildi');
     }
 
     /**
@@ -54,24 +64,46 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit($id)
     {
-        //
+        $room = Room::find($id);
+
+        $buildings = Building::all();
+
+       $floors = Floor::where('building_id',$room->floor->building_id)->get();
+
+
+       return view('rooms.edit', compact('room','buildings','floors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoomRequest $request, Room $room)
+    public function update(UpdateRoomRequest $request,$id)
     {
-        //
+//       dd($request);
+
+       $room = Room::find($id);
+
+       $room->update([
+            'floor_id' => $request->floors,
+            'number'   => $request->rooms,
+            'beds'     => $request->beds,
+            'comment'  => $request->comment ?? 'mavjud emas',
+       ]);
+
+       return redirect()->route('rooms.index')->with('success','Xona muvaffaqiyatli tahrirlandi');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy($id)
     {
-        //
+        $room = Room::find($id);
+
+        $room->delete();
+
+        return redirect()->route('rooms.index')->with('success','Xona muvaffaqiyatli o`chirildi');
     }
 }

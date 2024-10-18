@@ -4,9 +4,11 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\FacultyController;
 use App\Http\Controllers\admin\SendTaskController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\CitizenshipController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FlatSectionController;
 use App\Http\Controllers\FloorSectionController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ObjectsController;
 use App\Http\Controllers\ObjectSectionController;
@@ -30,6 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', UserController::class);
     Route::resource('buildings', BuildingController::class);
     Route::resource('rooms', RoomController::class);
+    Route::resource('guests', GuestController::class);
+    Route::resource('citizenships', CitizenshipController::class);
+    Route::resource('visits', VisitController::class);
 
 });
 
