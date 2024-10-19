@@ -18,10 +18,18 @@ class Visit extends Model
         'visa_period',
         'registration',
         'registration_period',
-        'room_id',
+        'bed_id',
         'comment',
         'arrive',
         'leave',
         'status',
     ];
+
+
+    public function building($id)
+    {
+        $building = Building::find($id);
+
+        return 1;
+    }
 }

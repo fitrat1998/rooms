@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beds;
+use App\Models\Guest;
 use App\Models\Visit;
 use App\Http\Requests\StoreVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;
@@ -19,9 +21,14 @@ class VisitController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $guest = Guest::find($id);
+        $beds = Beds::all();
+
+//        return $guest;
+
+        return view('guests.create', compact('guest', 'beds'));
     }
 
     /**
@@ -29,23 +36,47 @@ class VisitController extends Controller
      */
     public function store(StoreVisitRequest $request)
     {
-        //
+//        dd($request);
+
+        $visit = Visit::create([
+            'guest_id' => $request->guest_id,
+            'position' => $request->position,
+            'reason' => $request->reason,
+            'tarif' => $request->tarif,
+            'visa' => $request->visa ?? 'no',
+            'visa_period' => $request->visa_period ?? 'empty',
+            'registration' => $request->reg ?? 'no',
+            'registration_period' => $request->registration_period ?? 'empty',
+            'bed_id' => $request->room,
+            'comment' => $request->comment,
+            'arrive' => $request->arrive,
+            'leave' => $request->leave,
+            'status' => $request->order,
+        ]);
+
+        return redirect()->route('guests.index')->with('success', 'Tashrif muvaffaqiyatli qo`shildi');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Visit $visit)
+    public function show($id)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Visit $visit)
+    public function edit($id)
     {
-        //
+        $visit = Visit::where('guest_id', $id)->latest()->first();
+
+        $rooms = Beds::where('status', 'no')->get();
+
+//        return $visits;
+
+        return view('guests.visit', compact('visit', 'rooms'));
     }
 
     /**

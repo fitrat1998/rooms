@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('visa_period');
             $table->string('registration');
             $table->string('registration_period');
-            $table->integer('room_id');
+            $table->integer('bed_id');
             $table->integer('comment');
             $table->text('arrive');
             $table->text('leave');

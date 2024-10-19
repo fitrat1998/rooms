@@ -348,7 +348,8 @@
 <script>
     $(document).ready(function () {
         $('#building').change(function () {
-            var currentFloorId = {{ isset($room) ? $room->floor->id : 'null' }};
+            var currentFloorId = {{ isset($room) && $room->floor ? $room->floor->id : 'null' }};
+
             var buildingId = $(this).val();
             var url = '{{ route("buildings.show", ":id") }}';
             url = url.replace(':id', buildingId);
@@ -423,6 +424,18 @@
     } else {
         $('#reg_period_group').hide();
     }
+});
+
+
+
+ $(document).ready(function() {
+    $('#arrive').datepicker({
+        dateFormat: 'dd-mm-yy'
+    });
+
+    $('#leave').datepicker({
+        dateFormat: 'dd-mm-yy'
+    });
 });
 
 

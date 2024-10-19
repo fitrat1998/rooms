@@ -18,6 +18,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('guests', GuestController::class);
     Route::resource('citizenships', CitizenshipController::class);
     Route::resource('visits', VisitController::class);
+    Route::get('visits/create/{guest}', [VisitController::class, 'create'])->name('visits.create');
+
 
 });
 

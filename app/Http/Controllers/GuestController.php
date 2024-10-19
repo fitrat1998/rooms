@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beds;
 use App\Models\Citizenship;
 use App\Models\Guest;
 use App\Http\Requests\StoreGuestRequest;
 use App\Http\Requests\UpdateGuestRequest;
+use App\Models\Room;
 
 class GuestController extends Controller
 {
@@ -16,7 +18,9 @@ class GuestController extends Controller
     {
         $guests = Guest::all();
 
-        return view('guests.index', compact('guests'));
+        $rooms = Beds::where('status','no')->get();
+
+        return view('guests.index', compact('guests','rooms'));
     }
 
     /**
