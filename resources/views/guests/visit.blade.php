@@ -43,18 +43,18 @@
                                 <th>ID</th>
                                 <th>Fish</th>
                                 <th>Lavozim</th>
-                                <th>Kelish sababi</th>
+                                <th class="w-25" >Kelish sababi</th>
                                 <th>Tarif</th>
                                 <th>Visa</th>
-                                <th>Visa muddati</th>
+                                <th class="w-25" >Visa muddati</th>
                                 <th>Registratsiya</th>
-                                <th>Registratsiya muddati</th>
+                                <th class="w-25" >Registratsiya muddati</th>
                                 <th>Joy raqami</th>
                                 <th>Xona</th>
                                 <th>Izoh</th>
-                                <th>Kelish sanasi</th>
-                                <th>Qaytib ketish sanasi</th>
-                                <th>Status</th>
+                                <th class="w-25" >Kelish sanasi</th>
+                                <th class="w-25">Qaytib ketish sanasi</th>
+                                <th class="w-25" >Status</th>
                                 <th class="w-25">Amallar</th>
                             </tr>
                             </thead>
@@ -64,7 +64,13 @@
                                 <td>{{ $visit->guest_id }}</td>
                                 <td>{{ $visit->position }}</td>
                                 <td>{{ $visit->reason }}</td>
-                                <td>{{ $visit->tarif }}</td>
+                                <td>
+                                     @if($visit->tarif == 'free')
+                                        <span class="btn btn-succuss">Bepul</span>
+                                    @elseif($visit->tarif == 'paid')
+                                        <span class="btn btn-info">Pullik</span>
+                                    @endif
+                                </td>
                                 <td>{{ $visit->visa }}</td>
                                 <td>{{ $visit->visa_period }}</td>
                                 <td>{{ $visit->registration }}</td>

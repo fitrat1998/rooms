@@ -42,10 +42,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Fish</th>
-                                <th>
-                                    <Fuqaroligi></Fuqaroligi>
-                                </th>
                                 <th>Passport</th>
+                                <th>Fuqaroligi</th>
                                 <th class="w-25">Amallar</th>
                             </tr>
                             </thead>
