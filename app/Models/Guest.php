@@ -29,7 +29,11 @@ class Guest extends Model
 
     public function check_visit($id)
     {
-        $visit = Visit::where('guest_id', $id)->latest()->first();
+        $visit = Visit::where('guest_id', $id)
+            ->where('status', '!=', 'archived')
+            ->latest()
+            ->first();
+
 
         if ($visit) {
             return $visit->status;

@@ -8,6 +8,7 @@ use App\Models\Guest;
 use App\Http\Requests\StoreGuestRequest;
 use App\Http\Requests\UpdateGuestRequest;
 use App\Models\Room;
+use App\Models\Visit;
 
 class GuestController extends Controller
 {
@@ -89,6 +90,18 @@ class GuestController extends Controller
     public function destroy($id)
     {
         $guest = Guest::find($id);
+
+        $visit = Visit::where('guest_id',$guest->id)->first();
+
+        $bed = Beds::find($visit->bed_id);
+
+        $bed->update([
+            'status' => 'no'
+        ]);
+
+//        return $visit;
+
+        $visit->delete();
 
         $guest->delete();
 

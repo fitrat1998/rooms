@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('citizenships', CitizenshipController::class);
     Route::resource('visits', VisitController::class);
     Route::get('visits/create/{guest}', [VisitController::class, 'create'])->name('visits.create');
+    Route::put('visits/accept/{guest}', [VisitController::class, 'accept'])->name('visits.accept');
 
 
 });

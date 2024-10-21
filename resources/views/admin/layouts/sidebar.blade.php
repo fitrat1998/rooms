@@ -52,7 +52,7 @@
             <li class="nav-item has-treeview ">
                 <a href="#"
                    class="nav-link {{ Request::is('adminpermissions*') || Request::is('role*') || Request::is('user*') ? 'active' : '' }}">
-                    <i class="fas fa-users-cog"></i>
+                    <i class="fa-solid fa-school-flag"></i>
                     <p>
                         Turar joy
                         <i class="right fas fa-angle-left"></i>
@@ -65,7 +65,7 @@
                         <li class="nav-item">
                             <a href="{{ route('buildings.index') }}"
                                class="nav-link {{ Request::is('buildings*') ? 'active' : '' }}">
-                                <i class="fas fa-key"></i>
+                                <i class="fa-solid fa-school-flag"></i>
                                 <p>Binolar</p>
                             </a>
                         </li>
@@ -75,7 +75,7 @@
                         <li class="nav-item">
                             <a href="{{ route('rooms.index') }}"
                                class="nav-link {{ Request::is('rooms*') ? 'active' : '' }}">
-                                <i class="fas fa-key"></i>
+                                <i class="fa-solid fa-person-shelter"></i>
                                 <p>Xonalar</p>
                             </a>
                         </li>
@@ -88,7 +88,7 @@
             <li class="nav-item has-treeview ">
                 <a href="#"
                    class="nav-link {{ Request::is('guests*') || Request::is('role*') || Request::is('user*') ? 'active' : '' }}">
-                    <i class="fas fa-users-cog"></i>
+                    <i class="fa-solid fa-users"></i>
                     <p>
                         Mehmonlar
                         <i class="right fas fa-angle-left"></i>
@@ -102,7 +102,7 @@
                         <li class="nav-item">
                             <a href="{{ route('guests.index') }}"
                                class="nav-link {{ Request::is('guests*') ? 'active' : '' }}">
-                                <i class="fas fa-key"></i>
+                                <i class="fa-solid fa-user-tie"></i>
                                 <p>Mehmonlar</p>
                             </a>
                         </li>
@@ -112,7 +112,7 @@
                         <li class="nav-item">
                             <a href="{{ route('citizenships.index') }}"
                                class="nav-link {{ Request::is('citizenships*') ? 'active' : '' }}">
-                                <i class="fas fa-key"></i>
+                                <i class="fa-solid fa-earth-asia"></i>
                                 <p>Mamlakatlar</p>
                             </a>
                         </li>

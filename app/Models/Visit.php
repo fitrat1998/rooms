@@ -32,4 +32,20 @@ class Visit extends Model
 
         return 1;
     }
+
+    public function bed($id)
+    {
+        $bed = Beds::find($id);
+
+        return $bed;
+    }
+
+     public function room($id)
+    {
+        $room = Room::find($id);
+
+        return $room;
+    }
+
+
 }
