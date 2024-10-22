@@ -31,6 +31,9 @@
                         </a>
                         @can('user.add')
                         @endcan
+
+                        {{--                        {{ dd($rooms); }}--}}
+
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -53,12 +56,22 @@
                                 <tr>
                                     <td class="w-25">{{ $room->id }}</td>
                                     <td class="w-25">{{ $room->number }}</td>
-                                    <td class="w-25">{{ $room->beds }}</td>
+                                    <td class="w-25">
+                                        @foreach($room->beds as $bed)
+                                            @if($bed->status == 'no')
+                                                <span class="btn btn-success">{{ $bed->number }}</span>
+                                            @elseif($bed->status == 'planed')
+                                                <span class="btn btn-warning">{{ $bed->number }}</span>
+                                            @elseif($bed->status == 'now')
+                                                <span class="btn btn-danger ">{{ $bed->number }}</span>
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td class="w-25">{{ $room->floor->number }}</td>
                                     <td class="w-25">{{ $room->comment }}</td>
 
-                                        <td class="text-center">
-                                    @can('user.delete')
+                                    <td class="text-center">
+                                        @can('user.delete')
                                             <form action="{{ route('rooms.destroy',$room->id) }}" method="post">
                                                 @csrf
                                                 <div class="btn-group">
@@ -72,8 +85,8 @@
                                                         <i class="fa fa-trash"></i></button>
                                                 </div>
                                             </form>
-                                            @endcan
-                                        </td>
+                                        @endcan
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('floor_id');
             $table->integer('number');
-            $table->integer('beds');
+//            $table->integer('beds');
             $table->text('comment');
             $table->text('status');
             $table->timestamps();

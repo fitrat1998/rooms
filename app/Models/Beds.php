@@ -11,10 +11,11 @@ class Beds extends Model
 
     protected  $fillable = ['room_id','number','status'];
 
-    public function room()
-    {
-        return $this->belongsTo(Room::class);
-    }
+        public function room()
+        {
+            return $this->belongsTo(Room::class);
+        }
+
 
 
     public function building($id)
