@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Foydalanuvchilar</h1>
+                    <h1>Binolar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('index') }}">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item active">Foydalanuvchilar</li>
+                        <li class="breadcrumb-item active">Binolar</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Foydalanuvchilar</h3>
+                        <h3 class="card-title">Binolar</h3>
                         <a href="{{ route('buildings.create') }}" class="btn btn-success btn-sm float-right">
                             <span class="fas fa-plus-circle"></span>
                             Qo'shish

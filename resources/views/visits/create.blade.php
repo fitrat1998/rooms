@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Bino</h1>
+                    <h1>Tashrif</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('index') }}">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Binolar</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Tashriflar</a></li>
                         <li class="breadcrumb-item active">Qo'shish</li>
                     </ol>
                 </div>
@@ -38,19 +38,20 @@
                             <form action="{{ route('visits.store') }}"
                                   method="POST">
                                 @csrf
-                                <input type="hidden" name="guest_id"
-                                       value="{{ $guest->id  }}">
 
                                 <div class="form-group">
-                                    <h6 class="float-lg-left">Fish</h6>
-                                    <input type="text"
-                                           class="form-control {{ $errors->has('name') ? "is-invalid":"" }}"
-                                           value="{{ $guest->fullname }}" disabled>
-                                    @if($errors->has('name'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('name') }}</span>
+                                    <label for="guest">Mehmonlar</label>
+                                    <select id="guest" class="form-control select2" name="guest_id">
+                                        <option value="">mehmoni tanlang</option>
+                                        @foreach($guests as $guest)
+                                            <option value="{{ $guest->id }}">{{ $guest->fullname }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('guest'))
+                                        <span class="error invalid-feedback">{{ $errors->first('guest') }}</span>
                                     @endif
                                 </div>
+
 
                                 <div class="form-group">
                                     <h6 class="float-lg-left">Lavozimi</h6>
@@ -96,7 +97,7 @@
                                                name="visa" value="yes"
                                                class="form-check-input {{ $errors->has('visa') ? 'is-invalid' : '' }}">
                                         <label for="visa_yes"
-                                               class="form-check-label">Yes</label>
+                                               class="form-check-label">Ha</label>
                                     </div>
                                     <div
                                         class="form-check form-check-inline float-lg-left">
@@ -104,7 +105,7 @@
                                                value="no"
                                                class="form-check-input {{ $errors->has('visa') ? 'is-invalid' : '' }}">
                                         <label for="visa_no"
-                                               class="form-check-label">No</label>
+                                               class="form-check-label">Yo`q</label>
                                     </div>
                                     @if($errors->has('visa'))
                                         <span
@@ -133,7 +134,7 @@
                                                value="yes"
                                                class="form-check-input {{ $errors->has('reg') ? 'is-invalid' : '' }}">
                                         <label for="reg_yes"
-                                               class="form-check-label">Yes</label>
+                                               class="form-check-label">Ha</label>
                                     </div>
                                     <div
                                         class="form-check form-check-inline float-lg-left">
@@ -141,7 +142,7 @@
                                                value="no"
                                                class="form-check-input {{ $errors->has('reg') ? 'is-invalid' : '' }}">
                                         <label for="reg_no"
-                                               class="form-check-label">No</label>
+                                               class="form-check-label">Yo`q</label>
                                     </div>
                                     @if($errors->has('reg'))
                                         <span
@@ -171,7 +172,8 @@
                                                 value="{{ $bed->id }}">
                                                 ({{ $bed->number }} - bo`sh) ({{ $bed->room->number }} - xona)
                                                 ({{ $bed->room->floor->number ?? 'Qavat mavjud emas' }} - qavat)
-                                                ({{ $bed->building($bed->room->floor->building_id) ?? 'Bino mavjud emas' }} - Binosi)
+                                                ({{ $bed->building($bed->room->floor->building_id) ?? 'Bino mavjud emas' }}
+                                                - Binosi)
                                             </option>
                                         @endforeach
                                     </select>
@@ -215,28 +217,14 @@
                                     @endif
                                 </div>
 
+
+
                                 <div class="form-group">
-                                    <h6 class="float-lg-left">Band qilish turi</h6>
-                                    <select class="form-control" name="order" id="">
-                                        <option value="">tanlang</option>
-                                        <option value="now">Hozirga band qilish
-                                        </option>
-                                        <option value="planed">Keyinroqga
-                                            rejalashtirish
-                                        </option>
-                                    </select>
-                                    @if($errors->has('order'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('order') }}</span>
-                                    @endif
+                                    <button type="submit" class="btn btn-success float-right">Saqlash</button>
+                                    <a href="{{ route('guests.index') }}" class="btn btn-danger float-left">Bekor
+                                        qilish</a>
                                 </div>
-
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success float-right">Saqlash</button>
-                                <a href="{{ route('guests.index') }}" class="btn btn-danger float-left">Bekor qilish</a>
-                            </div>
-                        </form>
+                            </form>
 
                     </div>
                 </div>

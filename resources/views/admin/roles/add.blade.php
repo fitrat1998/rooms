@@ -41,14 +41,14 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <select multiple="multiple" name="permissions[]" size="20" class="duallistbox" aria-multiselectable="true">
+                                <select multiple="multiple" name="permissions[]" size="20" class="duallistbox" aria-multiselectable="true" id="duallistbox">
                                     @foreach($permissions as $permission)
-                                        <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                                        <option value="{{ $permission->name }}">{{ $permission->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Sarlavha</label>
+                                <label>Rol sarlavhasi</label>
                                 <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                             </div>
                             <div class="form-group">

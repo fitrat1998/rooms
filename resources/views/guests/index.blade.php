@@ -53,7 +53,7 @@
                                     <td>{{ $guest->id }}</td>
                                     <td>{{ $guest->fullname }}</td>
                                     <td>{{ $guest->passport_number }}</td>
-                                    <td>{{ $guest->citizenship->name }}</td>
+                                    <td>{{ $guest->citizenship->name ?? 'mavjud emas'}}</td>
                                     <td class="text-center">
                                         @can('user.delete')
 

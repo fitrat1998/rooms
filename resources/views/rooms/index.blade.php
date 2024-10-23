@@ -47,6 +47,7 @@
                                 <th>Xona raqami</th>
                                 <th>Joylar soni</th>
                                 <th>Qavat</th>
+                                <th>Bino nomi</th>
                                 <th>Izoh</th>
                                 <th class="w-25">Amallar</th>
                             </tr>
@@ -57,17 +58,19 @@
                                     <td class="w-25">{{ $room->id }}</td>
                                     <td class="w-25">{{ $room->number }}</td>
                                     <td class="w-25">
-                                        @foreach($room->beds as $bed)
-                                            @if($bed->status == 'no')
-                                                <span class="btn btn-success">{{ $bed->number }}</span>
-                                            @elseif($bed->status == 'planed')
-                                                <span class="btn btn-warning">{{ $bed->number }}</span>
-                                            @elseif($bed->status == 'now')
-                                                <span class="btn btn-danger ">{{ $bed->number }}</span>
-                                            @endif
-                                        @endforeach
+                                        <span class="btn btn-success">{{ count($room->beds) }}</span>
+{{--                                        @foreach($room->beds as $bed)--}}
+{{--                                            @if($bed->status == 'no')--}}
+{{--                                                <span class="btn btn-success">{{ $bed->number }}</span>--}}
+{{--                                            @elseif($bed->status == 'planed')--}}
+{{--                                                <span class="btn btn-warning">{{ $bed->number }}</span>--}}
+{{--                                            @elseif($bed->status == 'now')--}}
+{{--                                                <span class="btn btn-danger ">{{ $bed->number }}</span>--}}
+{{--                                            @endif--}}
+{{--                                        @endforeach--}}
                                     </td>
-                                    <td class="w-25">{{ $room->floor->number }}</td>
+                                    <td class="w-25"><span class="btn btn-primary">{{ $room->floor->number }}</span></td>
+                                    <td class="w-25"><span class="btn btn-success">{{ $room->floor->building->name }}</span></td>
                                     <td class="w-25">{{ $room->comment }}</td>
 
                                     <td class="text-center">

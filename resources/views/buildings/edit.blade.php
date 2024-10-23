@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('index') }}">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Foydalanuvchi</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Bino</a></li>
                         <li class="breadcrumb-item active">Tahrirlash</li>
                     </ol>
                 </div>

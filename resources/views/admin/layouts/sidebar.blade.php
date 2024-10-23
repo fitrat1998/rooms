@@ -86,6 +86,15 @@
                             </a>
                         </li>
                     @endcan
+
+                    @can('visits.show')
+                        <li class="nav-item">
+                            <a href="{{ route('visits.index') }}" class="nav-link {{ Request::is('visits*') ? 'active' : '' }}">
+                                <i class="fa-solid fa-earth-asia"></i>
+                                <p>Tashriflar</p>
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </li>
         @endcanany

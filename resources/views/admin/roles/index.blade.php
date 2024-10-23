@@ -37,7 +37,7 @@
                     <div class="card-body">
                         <!-- Data table -->
                         <table id="dataTable"
-                               class="table table-bordered table-striped dataTable dtr-inline table-responsive-lg"
+                               class=" dataTable table table-bordered table-striped dataTable dtr-inline table-responsive-lg"
                                role="grid" aria-describedby="dataTable_info">
                             <thead>
                             <tr>
@@ -56,7 +56,7 @@
                                     <td>{{ $role->title }}</td>
                                     <td>
                                         @foreach($role->permissions as $permission)
-                                            <span class="badge badge-primary">{{ $permission->name }} </span>
+                                            <span class="badge badge-primary">{{ $permission->title }} </span>
                                         @endforeach
                                     </td>
                                     <td class="text-center">

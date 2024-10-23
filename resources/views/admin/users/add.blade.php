@@ -59,9 +59,7 @@
                                        class="form-control {{ $errors->has('password') ? "is-invalid":"" }}" required>
                                 <span toggle="#password-field"
                                       class="fa fa-fw fa-eye toggle-password field-icon"></span>
-                                @if($errors->has('password'))
-                                    <span class="error invalid-feedback">{{ $errors->first('password') }}</span>
-                                @endif
+
                             </div>
                             <div class="form-group">
                                 <label>Parolni tasdiqlash</label>
@@ -69,10 +67,6 @@
                                        name="password_confirmation" required autocomplete="new-password">
                                 <span toggle="#password-confirm"
                                       class="fa fa-fw fa-eye toggle-password field-icon"></span>
-                                @if($errors->has('password_confirmation'))
-                                    <span
-                                        class="error invalid-feedback">{{ $errors->first('password_confirmation') }}</span>
-                                @endif
                                 <div id="message"></div>
                             </div>
 

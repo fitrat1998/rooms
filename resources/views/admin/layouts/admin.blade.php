@@ -295,15 +295,50 @@
 <!--<script src="dist/js/demo.js')}}'"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>
+
+
 <script>
     $.widget.bridge('uibutton', $.ui.button)
     table = new DataTable('#dataTable');
 
     duallist = $('.duallistbox').bootstrapDualListbox();
-</script>
-<script>
+
+
+    $(document).ready(function() {
+    $('.duallistbox').bootstrapDualListbox({
+        filterTextClear: 'Hammasini ko`rsatish',
+        filterPlaceHolder: 'Filter',
+        moveSelectedLabel: 'Tanlanganlarni ko`chirish',
+        moveAllLabel: 'Hammasini ko`chirish',
+        removeSelectedLabel: 'Tanlanganlarni o`chirish',
+        removeAllLabel: 'Hammasini o`chirish',
+        infoText: 'Ko`rsatilmoqda {0} ta yozuv',
+        infoTextEmpty: 'Ro`yxat bo`sh',
+        infoTextFiltered: '{0} ta yozuvdan {1} tasi ko`rsatilmoqda',
+        nonSelectedListLabel: 'Mavjud ro`yxat',
+        selectedListLabel: 'Tanlangan ro`yxat'
+    });
+});
 
 </script>
+
+   <script>
+        // Dual Listbox sozlamalari va tarjimasi
+        $(document).ready(function(){
+            $('.duallistbox').bootstrapDualListbox({
+                filterTextClear: 'Filterni tozalash',
+                filterPlaceHolder: 'Qidiruv...',
+                moveSelectedLabel: 'Tanlanganlarni o‘tkazing',
+                moveAllLabel: 'Barchasini o‘tkazing',
+                removeSelectedLabel: 'Tanlanganlarni olib tashlang',
+                removeAllLabel: 'Barchasini olib tashlang',
+                infoText: 'Ko‘rsatilgan {0} ta',
+                infoTextFiltered: 'Filtrlash orqali {0} tadan {1} tasi',
+                infoTextEmpty: 'Bo‘sh ro‘yxat'
+            });
+        });
+    </script>
+
 @if(session('success'))
     <script>
         $(function () {

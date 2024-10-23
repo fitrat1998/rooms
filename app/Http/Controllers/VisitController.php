@@ -15,21 +15,27 @@ class VisitController extends Controller
      */
     public function index()
     {
-        //
+        $guest = Guest::all();
+
+        $beds = Beds::where('status', 'no')->get();
+
+        $visits = Visit::all();
+
+        return view('visits.index', compact('guest', 'beds','visits'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create()
     {
-        $guest = Guest::find($id);
+        $guests = Guest::all();
 
-        $beds = Beds::where('status','no')->get();
+        $beds = Beds::where('status', 'no')->get();
 
 //        return $guest;
 
-        return view('guests.create', compact('guest', 'beds'));
+        return view('visits.create', compact('guests', 'beds'));
     }
 
     /**
@@ -52,7 +58,7 @@ class VisitController extends Controller
             'comment' => $request->comment,
             'arrive' => $request->arrive,
             'leave' => $request->leave,
-            'status' => $request->order,
+            'status' => 'empty',
         ]);
 
         $bed = Beds::find($visit->bed_id);
@@ -61,18 +67,18 @@ class VisitController extends Controller
             'status' => $visit->status,
         ]);
 
-        return redirect()->route('guests.index')->with('success', 'Tashrif muvaffaqiyatli qo`shildi');
+        return redirect()->route('visits.index')->with('success', 'Tashrif muvaffaqiyatli qo`shildi');
     }
 
-     public function accept(UpdateVisitRequest $request,$id)
+    public function accept(UpdateVisitRequest $request, $id)
     {
-       $visit = Visit::find($id);
+        $visit = Visit::find($id);
 
-       $visit->update([
-           'status' => 'archived'
-       ]);
+        $visit->update([
+            'status' => 'archived'
+        ]);
 
-       return redirect()->route('guests.index')->with('success','Tashrif muvaffaqiyatli arxivga olindi');
+        return redirect()->route('visits.index')->with('success', 'Tashrif muvaffaqiyatli arxivga olindi');
     }
 
     /**
@@ -94,19 +100,18 @@ class VisitController extends Controller
 
 //        return $visits;
 
-        return view('guests.visit', compact('visit', 'rooms'));
+        return view('visits.index', compact('visit', 'rooms'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVisitRequest $request,$id)
+    public function update(UpdateVisitRequest $request, $id)
     {
-       $visit = Visit::find($id);
+        $visit = Visit::find($id);
 
-       return $visit;
+        return $visit;
     }
-
 
 
     /**
@@ -118,6 +123,6 @@ class VisitController extends Controller
 
         $visit->delete();
 
-        return redirect()->route('guests.index')->with('success','Tashrif muvaffaqiyatli o`chirildi');
+        return redirect()->route('guests.index')->with('success', 'Tashrif muvaffaqiyatli o`chirildi');
     }
 }
