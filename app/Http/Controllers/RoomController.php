@@ -42,7 +42,6 @@ class RoomController extends Controller
         $room = Room::create([
             'floor_id' => $request->floors,
             'number' => $request->rooms,
-            'beds' => $request->beds,
             'comment' => $request->comment ?? 'mavjud emas',
         ]);
 
@@ -97,7 +96,6 @@ class RoomController extends Controller
         $room->update([
             'floor_id' => $request->floors,
             'number' => $request->rooms,
-            'beds' => $request->beds,
             'comment' => $request->comment ?? 'mavjud emas',
         ]);
 
