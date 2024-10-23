@@ -42,6 +42,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nomi</th>
+                                <th class="w-25">Qavatlar soni</th>
                                 <th class="w-25">Amallar</th>
                             </tr>
                             </thead>
@@ -50,14 +51,18 @@
                                 <tr>
                                     <td>{{ $building->id }}</td>
                                     <td>{{ $building->name }}</td>
+                                    <td class="w-25">
+                                        <span class="btn btn-success">{{ count($building->floors) }}</span>
+                                    </td>
 
-                                        <td class="text-center">
-                                    @can('user.delete')
+                                    <td class="text-center">
+                                        @can('user.delete')
                                             <form action="{{ route('buildings.destroy',$building->id) }}" method="post">
                                                 @csrf
                                                 <div class="btn-group">
                                                     @can('user.edit')
-                                                        <a href="{{ route('buildings.edit',$building->id) }}" type="button"
+                                                        <a href="{{ route('buildings.edit',$building->id) }}"
+                                                           type="button"
                                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                                     @endcan
                                                     <input name="_method" type="hidden" value="DELETE">
@@ -66,8 +71,8 @@
                                                         <i class="fa fa-trash"></i></button>
                                                 </div>
                                             </form>
-                                            @endcan
-                                        </td>
+                                        @endcan
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
