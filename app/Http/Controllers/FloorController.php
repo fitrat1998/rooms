@@ -35,9 +35,12 @@ class FloorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Floor $floor)
+    public function show($id)
     {
-        //
+
+        $floors = Floor::where('building_id', $id)->get();
+
+        return response()->json($floors);
     }
 
     /**

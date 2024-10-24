@@ -19,9 +19,9 @@ class GuestController extends Controller
     {
         $guests = Guest::all();
 
-        $rooms = Beds::where('status','no')->get();
+        $rooms = Beds::where('status', 'no')->get();
 
-        return view('guests.index', compact('guests','rooms'));
+        return view('guests.index', compact('guests', 'rooms'));
     }
 
     /**
@@ -39,6 +39,14 @@ class GuestController extends Controller
      */
     public function store(StoreGuestRequest $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'citizenship' => 'required',
+            'passport' => 'required|string|unique:guests,passport_number',
+        ], [
+            'passport.unique' => 'Bu pasport raqami allaqachon mavjud.',
+        ]);
+
         $guest = Guest::create([
             'fullname' => $request->name,
             'citizenship_id' => $request->citizenship,
@@ -73,6 +81,14 @@ class GuestController extends Controller
      */
     public function update(UpdateGuestRequest $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'citizenship' => 'required',
+            'passport' => 'required|string|unique:guests,passport_number',
+        ], [
+            'passport.unique' => 'Bu pasport raqami allaqachon mavjud.',
+        ]);
+
         $guest = Guest::find($id);
 
         $guest->update([
@@ -91,7 +107,7 @@ class GuestController extends Controller
     {
         $guest = Guest::find($id);
 
-        $visit = Visit::where('guest_id',$guest->id)->first();
+        $visit = Visit::where('guest_id', $guest->id)->first();
 
         $bed = Beds::find($visit->bed_id);
 

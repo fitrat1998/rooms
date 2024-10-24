@@ -7,6 +7,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\CitizenshipController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FlatSectionController;
+use App\Http\Controllers\FloorController;
 use App\Http\Controllers\FloorSectionController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
@@ -32,12 +33,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('adminpermissions', PermissionController::class);
     Route::resource('users', UserController::class);
     Route::resource('buildings', BuildingController::class);
+    Route::get('rooms/getrooms/{floor}', [RoomController::class, 'getRooms'])->name('getRooms');
     Route::resource('rooms', RoomController::class);
+    Route::resource('floors', FloorController::class);
     Route::resource('guests', GuestController::class);
     Route::resource('citizenships', CitizenshipController::class);
+    Route::get('visits/archived', [VisitController::class, 'archived'])->name('visits.archived');
     Route::resource('visits', VisitController::class);
-//    Route::get('visits/create/{guest}', [VisitController::class, 'create'])->name('visits.create');
     Route::put('visits/accept/{guest}', [VisitController::class, 'accept'])->name('visits.accept');
+//    Route::get('visits/create/{guest}', [VisitController::class, 'create'])->name('visits.create');
 
 
 });

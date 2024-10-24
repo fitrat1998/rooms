@@ -138,6 +138,16 @@
         #card {
             display: block;
         }
+
+
+        #roomtable {
+            width: 100% !important;
+        }
+
+        .dataTables_wrapper {
+            overflow: auto; /* Buni qo‘shing */
+        }
+
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -297,47 +307,47 @@
 <script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>
 
 
+
 <script>
-    $.widget.bridge('uibutton', $.ui.button)
-    table = new DataTable('#dataTable');
+    $(document).ready(function () {
+        $('.select2').select2({
+            placeholder: "Tanlang",
+            allowClear: true
+        });
 
-    duallist = $('.duallistbox').bootstrapDualListbox();
+        $('.duallistbox').bootstrapDualListbox();
 
-
-    $(document).ready(function() {
-    $('.duallistbox').bootstrapDualListbox({
-        filterTextClear: 'Hammasini ko`rsatish',
-        filterPlaceHolder: 'Filter',
-        moveSelectedLabel: 'Tanlanganlarni ko`chirish',
-        moveAllLabel: 'Hammasini ko`chirish',
-        removeSelectedLabel: 'Tanlanganlarni o`chirish',
-        removeAllLabel: 'Hammasini o`chirish',
-        infoText: 'Ko`rsatilmoqda {0} ta yozuv',
-        infoTextEmpty: 'Ro`yxat bo`sh',
-        infoTextFiltered: '{0} ta yozuvdan {1} tasi ko`rsatilmoqda',
-        nonSelectedListLabel: 'Mavjud ro`yxat',
-        selectedListLabel: 'Tanlangan ro`yxat'
+        // Initialize DataTables for all tables with class .dataTable
+        $('.dataTable').DataTable({
+            paging: true, // Enable pagination
+            pageLength: 10, // Number of rows per page
+            language: {
+                "sEmptyTable": "Ma'lumotlar mavjud emas",
+                "sInfo": "_START_ dan _END_ gacha _TOTAL_ ta yozuv",
+                "sInfoEmpty": "0 dan 0 gacha 0 ta yozuv",
+                "sInfoFiltered": "(filtrlangan _MAX_ ta yozuvdan)",
+                "sLengthMenu": "_MENU_ ta yozuv ko'rsatish",
+                "sLoadingRecords": "Yuklanmoqda...",
+                "sProcessing": "Qayta ishlanmoqda...",
+                "sSearch": "Qidirish:",
+                "sZeroRecords": "Hech qanday mos yozuv topilmadi",
+                "oPaginate": {
+                    "sFirst": "Birinchisi",
+                    "sLast": "Oxirgi",
+                    "sNext": "Keyingisi",
+                    "sPrevious": "Oldingisi"
+                },
+                "oAria": {
+                    "sSortAscending": ": ortacha tartiblash uchun boshing",
+                    "sSortDescending": ": kamayish tartiblash uchun boshing"
+                }
+            }
+        });
     });
-});
-
 </script>
 
-   <script>
-        // Dual Listbox sozlamalari va tarjimasi
-        $(document).ready(function(){
-            $('.duallistbox').bootstrapDualListbox({
-                filterTextClear: 'Filterni tozalash',
-                filterPlaceHolder: 'Qidiruv...',
-                moveSelectedLabel: 'Tanlanganlarni o‘tkazing',
-                moveAllLabel: 'Barchasini o‘tkazing',
-                removeSelectedLabel: 'Tanlanganlarni olib tashlang',
-                removeAllLabel: 'Barchasini olib tashlang',
-                infoText: 'Ko‘rsatilgan {0} ta',
-                infoTextFiltered: 'Filtrlash orqali {0} tadan {1} tasi',
-                infoTextEmpty: 'Bo‘sh ro‘yxat'
-            });
-        });
-    </script>
+
+
 
 @if(session('success'))
     <script>
@@ -417,9 +427,32 @@
 </script>
 
 
+
 <script>
- $(document).ready(function() {
-    $('input[name="visa"]').change(function() {
+    $(document).ready(function () {
+        $('input[name="visa"]').change(function () {
+            if ($('#visa_yes').is(':checked')) {
+                $('#period_group').show();
+                $('input[name="visa_period"]').datepicker({
+                    dateFormat: 'dd-mm-yy'
+                });
+            } else {
+                $('#period_group').hide();
+            }
+        });
+
+        $('input[name="reg"]').change(function () {
+            if ($('#reg_yes').is(':checked')) {
+                $('#reg_period_group').show();
+                $('input[name="reg_period"]').datepicker({
+                    dateFormat: 'dd-mm-yy'
+                });
+            } else {
+                $('#reg_period_group').hide();
+            }
+        });
+
+        // To ensure the correct state on page load if old value is set
         if ($('#visa_yes').is(':checked')) {
             $('#period_group').show();
             $('input[name="visa_period"]').datepicker({
@@ -428,9 +461,7 @@
         } else {
             $('#period_group').hide();
         }
-    });
 
-    $('input[name="reg"]').change(function() {
         if ($('#reg_yes').is(':checked')) {
             $('#reg_period_group').show();
             $('input[name="reg_period"]').datepicker({
@@ -441,41 +472,112 @@
         }
     });
 
-    // To ensure the correct state on page load if old value is set
-    if ($('#visa_yes').is(':checked')) {
-        $('#period_group').show();
-        $('input[name="visa_period"]').datepicker({
+
+    $(document).ready(function () {
+        $('#arrive').datepicker({
             dateFormat: 'dd-mm-yy'
         });
-    } else {
-        $('#period_group').hide();
-    }
 
-    if ($('#reg_yes').is(':checked')) {
-        $('#reg_period_group').show();
-        $('input[name="reg_period"]').datepicker({
+        $('#leave').datepicker({
             dateFormat: 'dd-mm-yy'
         });
-    } else {
-        $('#reg_period_group').hide();
-    }
-});
-
-
-
- $(document).ready(function() {
-    $('#arrive').datepicker({
-        dateFormat: 'dd-mm-yy'
     });
-
-    $('#leave').datepicker({
-        dateFormat: 'dd-mm-yy'
-    });
-});
 
 
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('.select2').select2({
+            placeholder: "Tanlang",
+            allowClear: true
+        });
+
+        $('#building').on('change', function () {
+            var buildingId = $(this).val();
+            if (buildingId) {
+                $.ajax({
+                    url: '/floors/' + buildingId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#floor').empty();
+                        $('#floor').append('<option value="">Qavatni tanlang</option>');
+                        $.each(data, function (key, value) {
+                            $('#floor').append('<option value="' + value.id + '">' + value.number + ' qavat</option>');
+                        });
+                        $('#floor').trigger('change');
+                    }
+                });
+            } else {
+                $('#floor').empty();
+                $('#floor').append('<option value="">Avval binoni tanlang</option>');
+            }
+        });
+
+        $('#floor').on('change', function () {
+            var floorId = $(this).val();
+            if (floorId) {
+                $.ajax({
+                    url: '/rooms/getrooms/' + floorId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+
+                        var table = $('#roomtable').DataTable();
+
+                        table.clear().draw();
+                        $.each(data, function (key, room) {
+                            table.row.add([
+                                '<span>' + room.id + '</span>',
+                                '<span class="btn btn-success">' + room.number + '</span>',
+                                '<span class="btn btn-success">' + room.beds.length + '</span>',
+                                '<span class="btn btn-success">' + room.floor.number + '</span>',
+                                '<span class="btn btn-success">' + room.floor.building.name + '</span>',
+                                '<span>' + room.comment + '</span>',
+
+                                '<a href="/rooms/' + room.id + '/edit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> ' +
+                                '<form action="/rooms/' + room.id + '" method="post" style="display:inline">@csrf<input name="_method" type="hidden" value="DELETE"><button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Вы уверены?\');"><i class="fa fa-trash"></i></button></form>'
+                            ]).draw();
+                        });
+                    }
+                });
+            } else {
+                $('#rooms-table-body').empty();
+            }
+        });
+
+
+        $('.roomtable').DataTable({
+            paging: true, // Paginatsiyani yoqish
+            pageLength: 10, // Har sahifada qancha yozuv ko‘rsatish
+            language: {
+                "sEmptyTable": "Ma'lumotlar mavjud emas",
+                "sInfo": "_START_ dan _END_ gacha _TOTAL_ ta yozuv",
+                "sInfoEmpty": "0 dan 0 gacha 0 ta yozuv",
+                "sInfoFiltered": "(filtrlangan _MAX_ ta yozuvdan)",
+                "sLengthMenu": "_MENU_ ta yozuv ko'rsatish",
+                "sLoadingRecords": "Yuklanmoqda...",
+                "sProcessing": "Qayta ishlanmoqda...",
+                "sSearch": "Qidirish:",
+                "sZeroRecords": "Hech qanday mos yozuv topilmadi",
+                "oPaginate": {
+                    "sFirst": "Birinchisi",
+                    "sLast": "Oxirgi",
+                    "sNext": "Keyingisi",
+                    "sPrevious": "Oldingisi"
+                },
+                "oAria": {
+                    "sSortAscending": ": ortacha tartiblash uchun boshing",
+                    "sSortDescending": ": kamayish tartiblash uchun boshing"
+                }
+            }
+        });
+
+    });
+
+
+</script>
 
 
 </body>

@@ -18,7 +18,9 @@ class RoomController extends Controller
     {
         $rooms = Room::with('beds')->get();
 
-        return view('rooms.index', compact('rooms'));
+        $buildings = Building::all();
+
+        return view('rooms.index', compact('rooms', 'buildings'));
     }
 
     /**
@@ -69,6 +71,16 @@ class RoomController extends Controller
         return response()->json($floors);
     }
 
+        public function getRooms($id)
+        {
+            $id = intval($id);
+
+            $rooms = Room::where('floor_id', $id)->with('floor.building', 'beds')->get();
+
+            return response()->json($rooms);
+
+        }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -78,10 +90,12 @@ class RoomController extends Controller
 
         $buildings = Building::all();
 
+        $beds = Beds::where('room_id',$id)->count();
+
         $floors = Floor::where('building_id', $room->floor->building_id)->get();
 
 
-        return view('rooms.edit', compact('room', 'buildings', 'floors'));
+        return view('rooms.edit', compact('room', 'buildings', 'floors','beds'));
     }
 
     /**

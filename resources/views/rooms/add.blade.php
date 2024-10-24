@@ -70,14 +70,13 @@
 
                             <div class="form-group">
                                 <label>Izoh (majburiy emas)</label>
-                                <textarea name="comment" id="" class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">
-                                    {{ old('comment') }}
-                                </textarea>
+                                <textarea name="comment" id="comment"
+                                          class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">{{ old('comment', isset($guest) ? $guest->comment : '') }}</textarea>
                                 @if($errors->has('comment'))
                                     <span class="error invalid-feedback">{{ $errors->first('comment') }}</span>
                                 @endif
-
                             </div>
+
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success float-right">Saqlash</button>

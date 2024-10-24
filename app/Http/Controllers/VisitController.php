@@ -19,10 +19,19 @@ class VisitController extends Controller
 
         $beds = Beds::where('status', 'no')->get();
 
-        $visits = Visit::all();
+        $visits = Visit::where('status','!=','archived');
 
-        return view('visits.index', compact('guest', 'beds','visits'));
+        return view('visits.index', compact('guest', 'beds', 'visits'));
     }
+
+    public function archived()
+    {
+        $guests = Guest::all();
+        $beds = Beds::where('status', 'no')->get(); // Ikkilamchi: `Beds` model nomini `Bed` deb tekshirib chiqing
+        $visits = Visit::where('status', 'archived')->get();
+        return view('visits.archived', compact('guests', 'beds', 'visits'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('fullname');
             $table->unsignedBigInteger('citizenship_id');
-            $table->string('passport_number');
+            $table->string('passport_number')->unique();
             $table->timestamps();
 
             $table->foreign('citizenship_id')

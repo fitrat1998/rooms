@@ -44,12 +44,12 @@
                             <div class="form-group">
                                 <select multiple="multiple" name="permissions[]" size="30" class="duallistbox" aria-multiselectable="true">
                                     @foreach($permissions as $permission)
-                                        <option value="{{ $permission->name }}" {{ ($role->hasPermissionTo($permission->name)) ? "selected":'' }}>{{ $permission->name   }}</option>
+                                        <option value="{{ $permission->name }}" {{ ($role->hasPermissionTo($permission->name)) ? "selected":'' }}>{{ $permission->title   }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Sarlavha</label>
+                                <label>Rol sarlavhasi</label>
                                 <input type="text" name="title" class="form-control" value="{{ old('title',$role->title) }}">
                             </div>
                             <div class="form-group">

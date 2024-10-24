@@ -32,76 +32,98 @@
                         @can('user.add')
                         @endcan
 
+
+
                         {{--                        {{ dd($rooms); }}--}}
 
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <!-- Data table -->
-                        <table id="dataTable"
-                               class="table table-bordered table-striped dataTable dtr-inline table-responsive-lg"
-                               user="grid" aria-describedby="dataTable_info">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Xona raqami</th>
-                                <th>Joylar soni</th>
-                                <th>Qavat</th>
-                                <th>Bino nomi</th>
-                                <th>Izoh</th>
-                                <th class="w-25">Amallar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($rooms as $room)
-                                <tr>
-                                    <td class="w-25">{{ $room->id }}</td>
-                                    <td class="w-25">{{ $room->number }}</td>
-                                    <td class="w-25">
-                                        <span class="btn btn-success">{{ count($room->beds) }}</span>
-{{--                                        @foreach($room->beds as $bed)--}}
-{{--                                            @if($bed->status == 'no')--}}
-{{--                                                <span class="btn btn-success">{{ $bed->number }}</span>--}}
-{{--                                            @elseif($bed->status == 'planed')--}}
-{{--                                                <span class="btn btn-warning">{{ $bed->number }}</span>--}}
-{{--                                            @elseif($bed->status == 'now')--}}
-{{--                                                <span class="btn btn-danger ">{{ $bed->number }}</span>--}}
-{{--                                            @endif--}}
-{{--                                        @endforeach--}}
-                                    </td>
-                                    <td class="w-25"><span class="btn btn-primary">{{ $room->floor->number }}</span></td>
-                                    <td class="w-25"><span class="btn btn-success">{{ $room->floor->building->name }}</span></td>
-                                    <td class="w-25">{{ $room->comment }}</td>
 
-                                    <td class="text-center">
-                                        @can('user.delete')
-                                            <form action="{{ route('rooms.destroy',$room->id) }}" method="post">
-                                                @csrf
-                                                <div class="btn-group">
-                                                    @can('user.edit')
-                                                        <a href="{{ route('rooms.edit',$room->id) }}" type="button"
-                                                           class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                                    @endcan
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                            onclick="if (confirm('Вы уверены?')) { this.form.submit() } ">
-                                                        <i class="fa fa-trash"></i></button>
-                                                </div>
-                                            </form>
-                                        @endcan
-                                    </td>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="building">Binoni tanlang</label>
+                                <select id="building" class="form-control select2" name="building">
+                                    <option value="">Bino tanlang</option>
+                                    @foreach($buildings as $building)
+                                        <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="floor">Qavatni tanlang</label>
+                                <select id="floor" class="form-control select2" name="floor">
+                                    <option value="">Avval binoni tanlang</option>
+                                </select>
+                            </div>
+                        </div>
+
+                            <!-- Data table -->
+                            <table id="roomtable"
+                                   class="table table-bordered table-striped roomtable dtr-inline table-responsive-lg" style="width: 1000px"
+                                   user="grid" aria-describedby="dataTable_info">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Xona raqami</th>
+                                    <th>Joylar soni</th>
+                                    <th>Qavat</th>
+                                    <th>Bino nomi</th>
+                                    <th>Izoh</th>
+                                    <th>Amallar</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                @foreach($rooms as $room)
+                                    <tr>
+                                        <td class="w-25">{{ $room->id }}</td>
+
+                                        <td class="w-25">{{ $room->number }}</td>
+
+                                        <td class="w-25">
+                                            <span class="btn btn-success">{{ count($room->beds) }}</span>
+                                        </td>
+
+                                        <td class="w-25">
+                                            <span class="btn btn-primary">{{ $room->floor->number }}</span>
+                                        </td>
+
+                                        <td class="w-25">
+                                            <span class="btn btn-success">{{ $room->floor->building->name }}</span>
+                                        </td>
+
+
+                                        <td class="w-25">{{ $room->comment }}</td>
+
+                                        <td class="text-center">
+                                            @can('user.delete')
+                                                <form action="{{ route('rooms.destroy',$room->id) }}" method="post">
+                                                    @csrf
+                                                    <div class="btn-group">
+                                                        @can('user.edit')
+                                                            <a href="{{ route('rooms.edit',$room->id) }}" type="button"
+                                                               class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                                        @endcan
+                                                        <input name="_method" type="hidden" value="DELETE">
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                                onclick="if (confirm('Вы уверены?')) { this.form.submit() } ">
+                                                            <i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
+            <!-- /.row -->
     </section>
     <!-- /.content -->
 @endsection

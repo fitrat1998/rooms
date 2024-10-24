@@ -78,22 +78,23 @@
                                 <label>Joylar soni</label>
                                 <input type="number" name="beds"
                                        class="form-control {{ $errors->has('floors') ? "is-invalid":"" }}"
-                                       value="{{ old('beds',$room->beds) }}" required>
+                                       value="{{ $beds }}" required>
                                 @if($errors->has('beds'))
                                     <span class="error invalid-feedback">{{ $errors->first('beds') }}</span>
                                 @endif
                             </div>
 
+
                             <div class="form-group">
                                 <label>Izoh (majburiy emas)</label>
-                                <textarea name="comment"
-                                          class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">
-                                    {{ old('comment',$room->comment) }}
-                                </textarea>
+                                @php
+                                    $comment = old('comment', isset($room) ? $room->comment : '');
+                                @endphp
+                                <textarea name="comment" id="comment"
+                                          class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">{{ $comment !== 'mavjud emas' ? $comment : '' }}</textarea>
                                 @if($errors->has('comment'))
                                     <span class="error invalid-feedback">{{ $errors->first('comment') }}</span>
                                 @endif
-
                             </div>
 
 

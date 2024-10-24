@@ -95,7 +95,6 @@ class UserController extends Controller
 
         abort_if((!auth()->user()->can('user.edit') && auth()->id() != $id), 403);
         $user = User::find($id);
-        $faculties = Faculty::all();
 
 
         if ($user->hasRole('Super Admin') && !auth()->user()->hasRole('Super Admin')) {

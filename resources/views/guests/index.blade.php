@@ -64,18 +64,18 @@
                                                 @csrf
 
                                                 <div class="btn-group">
-                                                    @if($guest->check_visit($guest->id) == 'no' || empty($guest->check_visit($guest->id)))
-                                                       <a href="{{ route('visits.create',$guest->id) }}"
-                                                               type="button"
-                                                               class="btn btn-success btn-sm m-1">
-                                                            <i class="fa-solid fa-arrow-up-right-from-square"></i> </a>
-                                                    @else
-                                                          <a href="{{ route('visits.edit',$guest->id) }}"
-                                                               type="button"
-                                                               class="btn btn-primary btn-sm m-1">
-                                                            <i class="fa-solid fa-eye"></i>
-                                                          </a>
-                                                    @endif
+{{--                                                    @if($guest->check_visit($guest->id) == 'no' || empty($guest->check_visit($guest->id)))--}}
+{{--                                                       <a href="{{ route('visits.create',$guest->id) }}"--}}
+{{--                                                               type="button"--}}
+{{--                                                               class="btn btn-success btn-sm m-1">--}}
+{{--                                                            <i class="fa-solid fa-arrow-up-right-from-square"></i> </a>--}}
+{{--                                                    @else--}}
+{{--                                                          <a href="{{ route('visits.edit',$guest->id) }}"--}}
+{{--                                                               type="button"--}}
+{{--                                                               class="btn btn-primary btn-sm m-1">--}}
+{{--                                                            <i class="fa-solid fa-eye"></i>--}}
+{{--                                                          </a>--}}
+{{--                                                    @endif--}}
                                                         @can('user.edit')
                                                             <a href="{{ route('guests.edit',$guest->id) }}"
                                                                type="button"
