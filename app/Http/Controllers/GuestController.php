@@ -109,15 +109,18 @@ class GuestController extends Controller
 
         $visit = Visit::where('guest_id', $guest->id)->first();
 
-        $bed = Beds::find($visit->bed_id);
+        if ($visit) {
+            $bed = Beds::find($visit->bed_id);
 
-        $bed->update([
-            'status' => 'no'
-        ]);
+            $bed->update([
+                'status' => 'no'
+            ]);
 
 //        return $visit;
 
-        $visit->delete();
+            $visit->delete();
+        }
+
 
         $guest->delete();
 
