@@ -45,7 +45,7 @@
 
                             <div class="form-group">
                                 <label>Fuqaroligi</label>
-                                <select name="citizenship" class="form-control" required id="citizenship">
+                                <select name="citizenship"  multiple="multiple" class="form-control select2" required id="citizenship">
                                     <option value="">davlatni tanlang</option>
                                     @foreach($citizenships as $citizenship)
                                         <option value="{{ $citizenship->id }}">{{ $citizenship->name }}</option>

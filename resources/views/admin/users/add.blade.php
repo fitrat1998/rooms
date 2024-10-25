@@ -54,6 +54,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Rol</label>
+                                <select class="select2" name="roles[]" data-placeholder="@lang('pleaseSelect')" style="width: 100%;">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Parol</label>
                                 <input type="password" name="password" id="password-field"
                                        class="form-control {{ $errors->has('password') ? "is-invalid":"" }}" required>

@@ -53,6 +53,19 @@
                                 @endif
                             </div>
 
+{{--                            @canany(['roles.edit','user.edit'])--}}
+                                <div class="form-group">
+                                    <label>Rol</label>
+                                    <select class="select2" multiple="multiple" name="roles[]"
+                                            data-placeholder="@lang('pleaseSelect')" style="width: 100%;">
+                                        @foreach($roles as $role)
+                                            <option
+                                                value="{{ $role->name }}" {{ ($user->hasRole($role->name) ? "selected":'') }}>{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+{{--                            @endcan--}}
+
                             <label>Parol</label>
                             <div class="form-group">
                                 <input type="password" name="password" id="password-field"

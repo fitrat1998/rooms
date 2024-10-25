@@ -82,7 +82,7 @@
                                     <td>{{ $visit->arrive }}</td>
                                     <td>{{ $visit->leave }}</td>
                                     <td>
-                                        {{ $visit->status }}
+                                        Arxivlangan
 {{--                                        @if($visit->status == 'planed')--}}
 {{--                                            <span class="btn btn-warning">Rejalashtirilgan</span>--}}
 {{--                                        @elseif($visit->status == 'now')--}}

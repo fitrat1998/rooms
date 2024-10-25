@@ -46,9 +46,11 @@
                                 <th class="w-25">Kelish sababi</th>
                                 <th>Tarif</th>
                                 <th>Visa</th>
-                                <th class="w-25">Visa muddati</th>
+                                <th class="w-25">Visa boshlanish vaqti</th>
+                                <th class="w-25">Visa tugash vaqti</th>
                                 <th>Registratsiya</th>
-                                <th class="w-25">Registratsiya muddati</th>
+                                <th class="w-25">Registratsiya boshlanish vaqti</th>
+                                <th class="w-25">Registratsiya tugash vaqti</th>
                                 <th>Joy raqami</th>
                                 <th>Xona</th>
                                 <th>Izoh</th>
@@ -59,12 +61,71 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($visits as $visit)
                                 <tr>
                                     <td>{{ $visit->id }}</td>
                                     <td>{{ $visit->guest_id }}</td>
-                                    <td>{{ $visit->position }}</td>
-                                    <td>{{ $visit->reason }}</td>
+
+                                    <!-- Display truncated text with '...' and add a link to open modal -->
+                                    <td>
+                                        <span id="position-text">{{ Str::limit($visit->position, 20) }}...</span>
+                                        <a href="#" data-toggle="modal" data-target="#positionModal">Ko'proq</a>
+                                    </td>
+                                    <td>
+                                        <span id="reason-text">{{ Str::limit($visit->reason, 20) }}...</span>
+                                        <a href="#" data-toggle="modal" data-target="#reasonModal">Ko'proq</a>
+                                    </td>
+
+                                    <!-- Modal for Position -->
+                                    <div class="modal fade" id="positionModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="positionLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="positionLabel">Lavozim</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Yopish">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $visit->position }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Yopish
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal for Reason -->
+                                    <div class="modal fade" id="reasonModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="reasonLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="reasonLabel">Sabab</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Yopish">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $visit->reason }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Yopish
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <td>
                                         @if($visit->tarif == 'free')
                                             <span class="btn btn-succuss">Bepul</span>
@@ -72,22 +133,60 @@
                                             <span class="btn btn-info">Pullik</span>
                                         @endif
                                     </td>
-                                    <td>{{ $visit->visa }}</td>
-                                    <td>{{ $visit->visa_period }}</td>
+                                    <td class="">
+                                        @if($visit == 'yes')
+                                            <span class="btn btn-primary">Mavjud</span>
+                                        @else
+                                             <span class="btn btn-danger">Mavjud emas</span>
+                                        @endif
+                                    </td>
+                                    <td class="w-25">{{ $visit->visa_start }}</td>
+                                    <td class="w-25">{{ $visit->visa_end }}</td>
                                     <td>{{ $visit->registration }}</td>
-                                    <td>{{ $visit->registration_period }}</td>
+                                    <td>{{ $visit->registration_start }}</td>
+                                    <td>{{ $visit->registration_end }}</td>
                                     <td>{{ $visit->bed($visit->bed_id)->number }}</td>
                                     <td>{{ $visit->room($visit->bed($visit->bed_id)->room_id)->number }}</td>
-                                    <td>{{ $visit->comment }}</td>
+                                    <!-- Truncated Text with Modal Link for Comment -->
+                                    <td>
+                                        <span id="comment-text">{{ Str::limit($visit->comment, 20) }}...</span>
+                                        <a href="#" data-toggle="modal" data-target="#commentModal">Ko'proq</a>
+                                    </td>
+
+                                    <!-- Modal for Comment -->
+                                    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="commentLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="commentLabel">Izoh</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Yopish">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $visit->comment }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Yopish
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <td>{{ $visit->arrive }}</td>
                                     <td>{{ $visit->leave }}</td>
                                     <td>
                                         {{ $visit->status }}
-{{--                                        @if($visit->status == 'planed')--}}
-{{--                                            <span class="btn btn-warning">Rejalashtirilgan</span>--}}
-{{--                                        @elseif($visit->status == 'now')--}}
-{{--                                            <span class="btn btn-success">Faol</span>--}}
-{{--                                        @endif--}}
+                                        {{--                                        @if($visit->status == 'planed')--}}
+                                        {{--                                            <span class="btn btn-warning">Rejalashtirilgan</span>--}}
+                                        {{--                                        @elseif($visit->status == 'now')--}}
+                                        {{--                                            <span class="btn btn-success">Faol</span>--}}
+                                        {{--                                        @endif--}}
                                     </td>
                                     <td class="text-center">
                                         @can('user.delete')

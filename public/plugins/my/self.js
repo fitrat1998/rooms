@@ -31,8 +31,6 @@ $('.duallistbox').bootstrapDualListbox({
 });
 
 
-
-
 function alertMessage(message = '', type = 'default') {
 
     let messageDiv =
@@ -261,7 +259,6 @@ $(function () {
 });
 
 
-
 $(document).on('click', '.toggle-password', function () {
     $(this).toggleClass("fa-eye fa-eye-slash");
     var input = $($(this).attr("toggle"));
@@ -273,7 +270,6 @@ $(document).on('click', '.toggle-password', function () {
 });
 
 
-
 $('#password-field, #password-confirm').on('keyup', function () {
     if ($('#password-field').val() === $('#password-confirm').val()) {
         $('#message').html('Tasdiqlandi').css('color', 'green');
@@ -281,3 +277,84 @@ $('#password-field, #password-confirm').on('keyup', function () {
         $('#message').html('Parol mos kelmadi').css('color', 'red');
     }
 });
+
+
+$(document).ready(function () {
+    $('.select2').select2({
+        placeholder: "Tanlang",
+        allowClear: true
+    });
+
+    $('#building_visit').on('change', function () {
+        var buildingId = $(this).val();
+        if (buildingId) {
+            $.ajax({
+                url: '/floors/' + buildingId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // console.log(data)
+                    $('#floor_visit').empty();
+                    $('#floor_visit').append('<option value="">Qavatni tanlang</option>');
+                    $.each(data, function (key, value) {
+                        $('#floor_visit').append('<option value="' + value.id + '">' + value.number + ' qavat</option>');
+                    });
+                    $('#floor_visit').trigger('change');
+                }
+            });
+        } else {
+            $('#floor_visit').empty();
+            $('#floor_visit').append('<option value="">Avval binoni tanlang</option>');
+        }
+    });
+
+    $('#floor_visit').on('change', function () {
+        var floorId = $(this).val();
+        if (floorId) {
+            $.ajax({
+                url: '/rooms/getrooms/' + floorId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // console.log(data)
+                    $('#room_visit').empty();
+                    $('#room_visit').append('<option value="">Qavatni tanlang</option>');
+                    $.each(data, function (key, value) {
+                        $('#room_visit').append('<option value="' + value.id + '">' + value.number + ' xona</option>');
+                    });
+                    $('#room_visit').trigger('change');
+                }
+            });
+        } else {
+            $('#room_visit').empty();
+            $('#room_visit').append('<option value="">Avval qavatni tanlang</option>');
+        }
+    });
+
+
+     $('#room_visit').on('change', function () {
+        var roomId = $(this).val();
+        if (roomId) {
+            $.ajax({
+                url: '/beds/' + roomId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                    $('#bed_visit').empty();
+                    $('#bed_visit').append('<option value="">Qavatni tanlang</option>');
+                    $.each(data, function (key, value) {
+                        $('#bed_visit').append('<option value="' + value.id + '">' + value.number + ' joy</option>');
+                    });
+                    $('#bed_visit').trigger('change');
+                }
+            });
+        } else {
+            $('#bed_visit').empty();
+            $('#bed_visit').append('<option value="">Avval xonani tanlang</option>');
+        }
+    });
+
+
+});
+

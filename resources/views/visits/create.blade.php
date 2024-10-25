@@ -112,17 +112,25 @@
                                             class="error invalid-feedback">{{ $errors->first('visa') }}</span>
                                     @endif
                                 </div>
+
                                 <div><br></div>
-                                <div class="form-group period_group"
-                                     id="period_group" style="display:none;">
-                                    <h6 style="float: left;">Viza muddati
-                                        (gacha)</h6>
-                                    <input type="text" name="visa_period"
-                                           class="form-control {{ $errors->has('visa_period') ? 'is-invalid' : '' }}"
-                                           value="{{ old('visa_period') }}">
-                                    @if($errors->has('visa_period'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('visa_period') }}</span>
+
+                                <!-- Viza muddati boshlanishi -->
+                                <div class="form-group" id="visa_period_group" style="display:none;">
+                                    <h6 style="float: left;">Viza muddati boshlanishi</h6>
+                                    <input type="text" name="visa_start"
+                                           class="form-control {{ $errors->has('visa_start') ? 'is-invalid' : '' }}"
+                                           value="{{ old('visa_start') }}">
+                                    @if($errors->has('visa_start'))
+                                        <span class="error invalid-feedback">{{ $errors->first('visa_start') }}</span>
+                                    @endif
+
+                                    <h6 style="float: left;">Viza muddati tugashi</h6>
+                                    <input type="text" name="visa_end"
+                                           class="form-control {{ $errors->has('visa_end') ? 'is-invalid' : '' }}"
+                                           value="{{ old('visa_end') }}">
+                                    @if($errors->has('visa_end'))
+                                        <span class="error invalid-feedback">{{ $errors->first('visa_end') }}</span>
                                     @endif
                                 </div>
 
@@ -149,39 +157,59 @@
                                             class="error invalid-feedback">{{ $errors->first('reg') }}</span>
                                     @endif
                                 </div>
+
                                 <div><br></div>
-                                <div class="form-group period_group"
-                                     id="reg_period_group" style="display:none;">
-                                    <h6 style="float: left;">Registratsiya muddati
-                                        (gacha)</h6>
-                                    <input type="text" name="reg_period"
-                                           class="form-control {{ $errors->has('reg_period') ? 'is-invalid' : '' }}"
-                                           value="{{ old('reg_period') }}">
-                                    @if($errors->has('reg_period'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('reg_period') }}</span>
+
+                                <!-- Registratsiya muddati boshlanishi -->
+                                <div class="form-group" id="reg_period_group" style="display:none;">
+                                    <h6 style="float: left;">Registratsiya muddati boshlanishi</h6>
+                                    <input type="text" name="reg_start"
+                                           class="form-control {{ $errors->has('reg_start') ? 'is-invalid' : '' }}"
+                                           value="{{ old('reg_start') }}">
+                                    @if($errors->has('reg_start'))
+                                        <span class="error invalid-feedback">{{ $errors->first('reg_start') }}</span>
+                                    @endif
+
+                                    <h6 style="float: left;">Registratsiya muddati tugashi</h6>
+                                    <input type="text" name="reg_end"
+                                           class="form-control {{ $errors->has('reg_end') ? 'is-invalid' : '' }}"
+                                           value="{{ old('reg_end') }}">
+                                    @if($errors->has('reg_end'))
+                                        <span class="error invalid-feedback">{{ $errors->first('reg_end') }}</span>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <h6 class="float-lg-left">Bo`sh joylar</h6>
-                                    <select class="form-control" name="bed" id="">
-                                        <option value="">joyni tanlang</option>
-                                        @foreach($beds as $bed)
-                                            <option
-                                                value="{{ $bed->id }}">
-                                                ({{ $bed->number }} - bo`sh) ({{ $bed->room->number }} - xona)
-                                                ({{ $bed->room->floor->number ?? 'Qavat mavjud emas' }} - qavat)
-                                                ({{ $bed->building($bed->room->floor->building_id) ?? 'Bino mavjud emas' }}
-                                                - Binosi)
-                                            </option>
+                                    <label for="building">Binoni tanlang</label>
+                                    <select id="building_visit" class="form-control select2" name="building">
+                                        <option value="">Bino tanlang</option>
+                                        @foreach($buildings as $building)
+                                            <option value="{{ $building->id }}">{{ $building->name }}</option>
                                         @endforeach
                                     </select>
-                                    @if($errors->has('room'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('room') }}</span>
-                                    @endif
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="floor">Qavatni tanlang</label>
+                                    <select id="floor_visit" class="form-control select2" name="floor_id">
+                                        <option value="">Avval binoni tanlang</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="room">Xonani tanlang</label>
+                                    <select id="room_visit" class="form-control select2" name="room_id">
+                                        <option value="">Avval binoni tanlang</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bed">Joyni tanlang</label>
+                                    <select id="bed_visit" class="form-control select2" name="bed_id">
+                                        <option value="">Avval binoni tanlang</option>
+                                    </select>
+                                </div>
+
 
                                 <div class="form-group">
                                     <h6 class="float-lg-left">Izoh</h6>
@@ -216,7 +244,6 @@
                                             class="error invalid-feedback">{{ $errors->first('leave') }}</span>
                                     @endif
                                 </div>
-
 
 
                                 <div class="form-group">

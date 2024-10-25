@@ -35,9 +35,15 @@ class BedsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Beds $beds)
+    public function show($id)
     {
-        //
+        $id = intval($id);
+
+        $beds = Beds::where('room_id', $id)
+            ->where('status','no')
+            ->get();
+
+        return response()->json($beds);
     }
 
     /**

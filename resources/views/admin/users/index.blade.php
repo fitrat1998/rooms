@@ -43,6 +43,7 @@
                                 <th>ID</th>
                                 <th>Fish</th>
                                 <th>Login</th>
+                                <th>Rol</th>
                                 <th>Ruxsatlar</th>
                                 <th class="w-25">Amallar</th>
                             </tr>
@@ -53,6 +54,11 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->login }}</td>
+                                    <td>
+                                            @foreach($user->roles()->pluck('name') as $role)
+                                                <span class="badge badge-primary">{{ $role }} </span>
+                                            @endforeach
+                                        </td>
                                     <td>
                                         @foreach($user->getAllPermissions()->pluck('name') as $permission)
                                             <span class="badge badge-secondary">{{ $permission }} </span>

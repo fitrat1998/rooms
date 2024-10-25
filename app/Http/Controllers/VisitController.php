@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beds;
+use App\Models\Building;
 use App\Models\Guest;
 use App\Models\Visit;
 use App\Http\Requests\StoreVisitRequest;
@@ -19,7 +20,7 @@ class VisitController extends Controller
 
         $beds = Beds::where('status', 'no')->get();
 
-        $visits = Visit::where('status','!=','archived');
+        $visits = Visit::where('status','!=','archived')->get();
 
         return view('visits.index', compact('guest', 'beds', 'visits'));
     }
@@ -42,9 +43,11 @@ class VisitController extends Controller
 
         $beds = Beds::where('status', 'no')->get();
 
+        $buildings = Building::all();
+
 //        return $guest;
 
-        return view('visits.create', compact('guests', 'beds'));
+        return view('visits.create', compact('guests', 'buildings'));
     }
 
     /**
@@ -60,10 +63,12 @@ class VisitController extends Controller
             'reason' => $request->reason,
             'tarif' => $request->tarif,
             'visa' => $request->visa ?? 'no',
-            'visa_period' => $request->visa_period ?? 'empty',
+            'visa_start' => $request->visa_start ?? 'empty',
+            'visa_end' => $request->visa_end ?? 'empty',
             'registration' => $request->reg ?? 'no',
-            'registration_period' => $request->reg_period ?? 'empty',
-            'bed_id' => $request->bed,
+            'registration_start' => $request->reg_start ?? 'empty',
+            'registration_end' => $request->reg_end ?? 'empty',
+            'bed_id' => $request->bed_id,
             'comment' => $request->comment,
             'arrive' => $request->arrive,
             'leave' => $request->leave,

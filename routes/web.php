@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\FacultyController;
 use App\Http\Controllers\admin\SendTaskController;
+use App\Http\Controllers\BedsController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\CitizenshipController;
 use App\Http\Controllers\FeeController;
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('buildings', BuildingController::class);
     Route::get('rooms/getrooms/{floor}', [RoomController::class, 'getRooms'])->name('getRooms');
     Route::resource('rooms', RoomController::class);
+    Route::resource('beds', BedsController::class);
     Route::resource('floors', FloorController::class);
     Route::resource('guests', GuestController::class);
     Route::resource('citizenships', CitizenshipController::class);

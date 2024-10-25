@@ -36,7 +36,7 @@ class UserController extends Controller
 //        $faculties = Faculty::all();
         $roles = Role::where('name', '!=', 'Super Admin')->get();
 
-        return view('admin.users.add');
+        return view('admin.users.add', compact('roles'));
     }
 
     /**
@@ -46,15 +46,17 @@ class UserController extends Controller
     {
         abort_if_forbidden('user.add');
 
+//        dd($request);
+
         $this->validate($request, [
-        'name' => ['required', 'string', 'max:255'],
-        'login' => ['required', 'string', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-    ], [
-        'login.unique' => 'Kiritilgan login allaqachon mavjud. Iltimos, boshqa login tanlang.',
-        'password.min' => 'Parol kamida 8 ta belgidan iborat bo‘lishi kerak.',
-        'password.confirmed' => 'Parol tasdiqlanishi mos kelmadi.',
-    ]);
+            'name' => ['required', 'string', 'max:255'],
+            'login' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'login.unique' => 'Kiritilgan login allaqachon mavjud. Iltimos, boshqa login tanlang.',
+            'password.min' => 'Parol kamida 8 ta belgidan iborat bo‘lishi kerak.',
+            'password.confirmed' => 'Parol tasdiqlanishi mos kelmadi.',
+        ]);
 
 
         $user = User::create([
@@ -65,15 +67,17 @@ class UserController extends Controller
             'password' => Hash::make($request->get('password')),
         ]);
 
-        if (!Role::where('name', 'user')->exists()) {
-            Role::create([
-                'name'          => 'user',
-                'guard_name'    => 'web',
-                'title'         => 'Foydalanuvchi'
-            ]);
-        }
+        $user->assignRole($request->get('roles'));
 
-        $user->assignRole('user');
+//        if (!Role::where('name', 'user')->exists()) {
+//            Role::create([
+//                'name'          => 'user',
+//                'guard_name'    => 'web',
+//                'title'         => 'Foydalanuvchi'
+//            ]);
+//        }
+
+//        $user->assignRole('user');
 
         return redirect()->route('users.index')->with('success', 'Foydalanuvchi muvaffaqiyatli qo‘shildi');
 
@@ -102,10 +106,12 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+         if (auth()->user()->hasRole('Super Admin'))
+            $roles = Role::all();
+        else
+            $roles = Role::where('name','!=','Super Admin')->get();
 
-        $roles = Role::where('name', '!=', 'Super Admin')->get();
-
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user','roles'));
     }
 
     /**
@@ -140,7 +146,10 @@ class UserController extends Controller
                 'updated_at' => now()
             ]);
         }
-//
+
+        if (isset($request->roles)) $user->syncRoles($request->get('roles'));
+        unset($user->roles);
+
 //        unset($request['password']);
 
 

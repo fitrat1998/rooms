@@ -50,6 +50,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <!-- DataTables Bootstrap 5 Integration CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.css">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+
     <style>
         .stepper-wrapper {
             margin-top: auto;
@@ -296,6 +300,18 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>--}}
+{{--<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>--}}
+{{--<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>--}}
+
+
 <script src="{{ asset('plugins/my/self.js')}}"></script>
 
 
@@ -307,7 +323,6 @@
 <script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>
 
 
-
 <script>
     $(document).ready(function () {
         $('.select2').select2({
@@ -317,10 +332,32 @@
 
         $('.duallistbox').bootstrapDualListbox();
 
-        // Initialize DataTables for all tables with class .dataTable
         $('.dataTable').DataTable({
-            paging: true, // Enable pagination
-            pageLength: 10, // Number of rows per page
+            paging: true,
+            pageLength: 10,
+            responsive: true,
+            dom: 'Bfrtip', // Define element placement
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Nusxa ko`chirish'
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV'
+                },
+                {
+                    extend: 'excel',
+                    text: 'Excel'
+                },
+                {
+                    extend: 'print',
+                    text: 'Chop etish'
+                }
+            ],
+            scrollY: '50vh',
+            scrollCollapse: true,
+            scrollX: true,
             language: {
                 "sEmptyTable": "Ma'lumotlar mavjud emas",
                 "sInfo": "_START_ dan _END_ gacha _TOTAL_ ta yozuv",
@@ -343,10 +380,9 @@
                 }
             }
         });
+
     });
 </script>
-
-
 
 
 @if(session('success'))
@@ -427,24 +463,25 @@
 </script>
 
 
-
 <script>
     $(document).ready(function () {
+        // Handle visa period toggle
         $('input[name="visa"]').change(function () {
             if ($('#visa_yes').is(':checked')) {
-                $('#period_group').show();
-                $('input[name="visa_period"]').datepicker({
+                $('#visa_period_group').show();
+                $('input[name="visa_start"], input[name="visa_end"]').datepicker({
                     dateFormat: 'dd-mm-yy'
                 });
             } else {
-                $('#period_group').hide();
+                $('#visa_period_group').hide();
             }
         });
 
+        // Handle registration period toggle
         $('input[name="reg"]').change(function () {
             if ($('#reg_yes').is(':checked')) {
                 $('#reg_period_group').show();
-                $('input[name="reg_period"]').datepicker({
+                $('input[name="reg_start"], input[name="reg_end"]').datepicker({
                     dateFormat: 'dd-mm-yy'
                 });
             } else {
@@ -452,19 +489,19 @@
             }
         });
 
-        // To ensure the correct state on page load if old value is set
+        // Ensure the correct state on page load if old value is set
         if ($('#visa_yes').is(':checked')) {
-            $('#period_group').show();
-            $('input[name="visa_period"]').datepicker({
+            $('#visa_period_group').show();
+            $('input[name="visa_start"], input[name="visa_end"]').datepicker({
                 dateFormat: 'dd-mm-yy'
             });
         } else {
-            $('#period_group').hide();
+            $('#visa_period_group').hide();
         }
 
         if ($('#reg_yes').is(':checked')) {
             $('#reg_period_group').show();
-            $('input[name="reg_period"]').datepicker({
+            $('input[name="reg_start"], input[name="reg_end"]').datepicker({
                 dateFormat: 'dd-mm-yy'
             });
         } else {

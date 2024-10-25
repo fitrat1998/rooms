@@ -17,9 +17,11 @@ return new class extends Migration {
             $table->string('reason');
             $table->string('tarif');
             $table->string('visa');
-            $table->string('visa_period');
+            $table->string('visa_start');
+            $table->string('visa_end');
             $table->string('registration');
-            $table->string('registration_period');
+            $table->string('registration_start');
+            $table->string('registration_end');
             $table->integer('bed_id');
             $table->integer('comment');
             $table->text('arrive');
