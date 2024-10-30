@@ -42,4 +42,10 @@ class Guest extends Model
         }
 
     }
+
+    public function visits()
+    {
+        return $this->belongsToMany(Visit::class);
+    }
+
 }

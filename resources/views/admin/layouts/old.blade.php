@@ -183,7 +183,6 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 
-
 <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
 <script src="{{ asset('plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>

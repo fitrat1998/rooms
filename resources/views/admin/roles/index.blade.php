@@ -38,7 +38,7 @@
                         <!-- Data table -->
                         <table id="dataTable"
                                class=" dataTable table table-bordered table-striped dataTable dtr-inline table-responsive-lg"
-                               role="grid" aria-describedby="dataTable_info">
+                               role="grid" aria-describedby="dataTable_info" width="100%">
                             <thead>
                             <tr>
                                 <th>ID</th>

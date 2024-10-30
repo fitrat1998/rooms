@@ -34,7 +34,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <!-- Data table -->
-                        <table id="dataTable" class="table table-bordered table-striped dataTable dtr-inline table-responsive-lg" role="grid" aria-describedby="dataTable_info">
+                        <table id="dataTable" class="table table-bordered table-striped dataTable dtr-inline table-responsive-lg" role="grid" aria-describedby="dataTable_info" width="100%">
                             <thead>
                             <tr>
                                 <th>ID</th>

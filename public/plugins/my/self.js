@@ -281,7 +281,6 @@ $('#password-field, #password-confirm').on('keyup', function () {
 
 $(document).ready(function () {
     $('.select2').select2({
-        placeholder: "Tanlang",
         allowClear: true
     });
 

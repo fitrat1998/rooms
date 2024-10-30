@@ -36,8 +36,8 @@
                     <div class="card-body">
                         <!-- Data table -->
                         <table id="dataTable"
-                               class="table table-bordered table-striped dataTable dtr-inline table-responsive-lg"
-                               user="grid" aria-describedby="dataTable_info">
+                               class="table table-bordered table-striped dataTable dtr-inline table-responsive-lg nowrap"
+                               user="grid" aria-describedby="dataTable_info"  width="100%">
                             <thead>
                             <tr>
                                 <th>ID</th>

@@ -60,8 +60,8 @@
 
                             <!-- Data table -->
                             <table id="roomtable"
-                                   class="table table-bordered table-striped roomtable dtr-inline table-responsive-lg" style="width: 1000px"
-                                   user="grid" aria-describedby="dataTable_info">
+                                   class="table table-bordered table-striped roomtable dtr-inline table-responsive-lg nowrap" style="width: 1000px"
+                                   user="grid" aria-describedby="dataTable_info" width="100%">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -85,11 +85,11 @@
                                         </td>
 
                                         <td class="w-25">
-                                            <span class="btn btn-primary">{{ $room->floor->number }}</span>
+                                            <span class="btn btn-primary">{{ $room->floor->number ?? '0' }}</span>
                                         </td>
 
                                         <td class="w-25">
-                                            <span class="btn btn-success">{{ $room->floor->building->name }}</span>
+                                            <span class="btn btn-success">{{ $room->floor->building->name ?? 0 }}</span>
                                         </td>
 
 

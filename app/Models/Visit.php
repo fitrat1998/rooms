@@ -42,12 +42,17 @@ class Visit extends Model
         return $bed;
     }
 
-     public function room($id)
+    public function room($id)
     {
         $room = Room::find($id);
 
         return $room;
     }
 
+
+    public function guests()
+    {
+        return $this->hasMany(Guest::class);
+    }
 
 }
