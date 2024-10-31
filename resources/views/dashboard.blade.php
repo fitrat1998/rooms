@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-       <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -44,16 +44,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($visits as $visit)
-                                    <tr>
-                                        <td>{{ $visit->id }}</td>
-                                            <td>{{ $visit->guests }}</td>
-                                        <td>{{ $visit->beds }}</td>
-                                        <td>{{ $visit->number }}</td>
-                                        <td>{{ $visit->id }}</td>
-                                        <td>{{ $visit->id }}</td>
-                                    </tr>
-                                @endforeach
+                            @foreach($rooms as $room)
+                                <tr>
+                                    <td>{{ $room->id }}</td>
+                                    <td>John</td>
+                                    <td>England</td>
+                                    <td>{{ $room->number }}</td>
+                                    <td>
+                                        @foreach($room->beds as $bed)
+                                            {{ $bed->number }}
+                                        @endforeach
+                                    </td>
+                                    <td>{{ $room->floor->number }}</td>
+                                    <td>{{ $room->floor->building->name }}</td>
+
+                                </tr>
+                            @endforeach
 
                             </tbody>
                         </table>
