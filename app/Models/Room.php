@@ -27,6 +27,19 @@ class Room extends Model
     }
 
 
-    public function
+    public function visit($id)
+    {
+        $visit = Visit::where('bed_id',$id)
+            ->where('status','empty')
+            ->first();
+
+        return $visit;
+    }
+
+    public function guest($id)
+    {
+        $guest = Guest::find($id);
+        return $guest;
+    }
 
 }

@@ -50,9 +50,10 @@ class Visit extends Model
     }
 
 
-    public function guests()
-    {
-        return $this->hasMany(Guest::class);
-    }
+  public function guest()
+{
+    return $this->belongsTo(Guest::class);
+}
+
 
 }
