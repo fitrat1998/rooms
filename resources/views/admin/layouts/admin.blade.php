@@ -68,65 +68,6 @@
             overflow-x: auto;
         }
 
-        /* Jadvalning asosiy stili */
-        .custom-table {
-            border-collapse: separate;
-            border-spacing: 0 10px;
-            width: 100%;
-        }
-
-        table.dataTable thead th {
-            white-space: nowrap; /* Matnlarni qator ichida qisqartirmasdan joylashtirish */
-        }
-
-        table.dataTable {
-            width: 100% !important; /* Jadvalni butun kenglikka o'rnatish */
-        }
-
-        .custom-table tbody td {
-            vertical-align: middle; /* Kontentni o'rtaga joylashtirish */
-        }
-
-        .table-responsive-lg {
-            overflow-x: auto; /* Jadvalni scrol qilish imkoniyatini berish */
-        }
-
-
-        .custom-table tbody tr {
-            background-color: #f8f9fa; /* Oddiy satr rangi */
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-
-        .custom-table tbody tr:hover {
-            background-color: #fffcf5; /* Hover rangi */
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Hover shadow */
-            transform: translateY(-3px); /* Satrdagi ko'tarilish */
-        }
-
-        /* Har bir katakka hover effekti */
-        .custom-table tbody td {
-            padding: 15px;
-            position: relative;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .custom-table tbody td:hover {
-            background-color: #ffecb3; /* Katak hover effekti */
-        }
-
-        /* Paginate tugmalarining stili */
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            background-color: #4caf50;
-            color: white !important;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-        }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            background-color: #388e3c;
-        }
-
 
     </style>
 
@@ -344,7 +285,7 @@
         $('.dataTable').DataTable({
             paging: true,
             pageLength: 10,
-            // responsive: true,
+            responsive: true,
             dom: 'Bfrtip', // Define element placement
             buttons: [
                 {

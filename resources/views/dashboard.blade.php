@@ -95,7 +95,7 @@
                                                  aria-labelledby="custom-tabs-one-profile-tab">
                                                 <div class="table-responsive-lg">
                                                     <table id="dataTable"
-                                                           class="table custom-table table-bordered table-striped dataTable dtr-inline nowrap"
+                                                           class="table custom-table table-bordered table-striped roomtable dtr-inline nowrap"
                                                            user="grid" aria-describedby="dataTable_info" width="100%">
                                                         <thead>
                                                         <tr>
