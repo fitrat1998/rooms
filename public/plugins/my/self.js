@@ -331,7 +331,7 @@ $(document).ready(function () {
     });
 
 
-     $('#room_visit').on('change', function () {
+    $('#room_visit').on('change', function () {
         var roomId = $(this).val();
         if (roomId) {
             $.ajax({
@@ -352,6 +352,18 @@ $(document).ready(function () {
             $('#bed_visit').empty();
             $('#bed_visit').append('<option value="">Avval xonani tanlang</option>');
         }
+    });
+
+
+    $(document).ready(function () {
+        $('#arrive').datepicker({
+            dateFormat: 'dd-mm-yy',
+            defaultDate: "{{ old('arrive') }}"
+        });
+        $('#leave').datepicker({
+            dateFormat: 'dd-mm-yy',
+            defaultDate: "{{ old('leave') }}"
+        });
     });
 
 

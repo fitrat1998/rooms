@@ -468,7 +468,6 @@
 
         $('#building').on('change', function () {
             var buildingId = $(this).val();
-            alert(1)
             if (buildingId) {
                 $.ajax({
                     url: '/floors/' + buildingId,

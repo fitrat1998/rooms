@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Building;
 use App\Models\Room;
 use App\Models\Visit;
 use Illuminate\Http\Request;
@@ -17,8 +18,10 @@ class HomeController extends Controller
 
         $rooms = Room::all();
 
+        $buildings = Building::all();
 
 
-        return view('dashboard',compact('visits','rooms'));
+
+        return view('dashboard',compact('visits','rooms','buildings'));
     }
 }

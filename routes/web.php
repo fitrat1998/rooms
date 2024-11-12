@@ -7,6 +7,7 @@ use App\Http\Controllers\BedsController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\CitizenshipController;
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\FilterDashboardController;
 use App\Http\Controllers\FlatSectionController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\FloorSectionController;
@@ -43,6 +44,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('visits/archived', [VisitController::class, 'archived'])->name('visits.archived');
     Route::resource('visits', VisitController::class);
     Route::put('visits/accept/{guest}', [VisitController::class, 'accept'])->name('visits.accept');
+
+    Route::match(['get', 'post'], 'filterdashboard/filters', [FilterDashboardController::class, 'filters'])->name('filterdashboard.filters');
+    Route::resource('filterdashboard', FilterDashboardController::class);
 //    Route::get('visits/create/{guest}', [VisitController::class, 'create'])->name('visits.create');
 
 

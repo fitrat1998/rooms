@@ -65,7 +65,7 @@
                             @foreach($visits as $visit)
                                 <tr>
                                     <td>{{ $visit->id }}</td>
-                                    <td>{{ $visit->guest_id }}</td>
+                                    <td>{{ $visit->guest->fullname }}</td>
 
                                     <!-- Display truncated text with '...' and add a link to open modal -->
                                     <td>

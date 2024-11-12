@@ -20,15 +20,57 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title ">Malumotlar</h3>
-                        <a href="{{ route('users.create') }}" class="btn btn-success btn-sm float-right">
-                            <span class="fas fa-plus-circle"></span>
-                            Qo'shish
-                        </a>
+
                         @can('user.add')
                         @endcan
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+
+                        <form action="{{ route('filterdashboard.filters') }}" method="GET">
+                            @csrf
+                            <div class="form-row">
+
+                                <div class="form-group col-md-2">
+                                    <label for="building">Binoni tanlang</label>
+                                    <select id="building" class="form-control select2" name="building">
+                                        <option value="">Bino tanlang</option>
+                                        @foreach($buildings as $building)
+                                            <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label for="floor">Qavatni tanlang</label>
+                                    <select id="floor" class="form-control select2" name="floor">
+                                        <option value="">Avval binoni tanlang</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label for="arrive">Kelib tushish sanasi</label>
+                                    <input type="text" id="arrive" class="form-control datepicker" name="arrive"
+                                           placeholder="Sana kiriting" value="{{ old('arrive') }}">
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label for="leave">Ketish sanasi</label>
+                                    <input type="text" id="leave" class="form-control datepicker" name="leave"
+                                           placeholder="Sana kiriting" value="{{ old('leave') }}">
+                                </div>
+
+                                <div class="form-group col-md-2 mt-2">
+                                    <label for="submit"></label>
+                                    <button class="form-control btn btn-primary" type="submit" id="submit"
+                                            name="submit">Filterlash
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </form>
+
                         <!-- ./row -->
                         <div class="row">
                             <div class="col-12 col-sm-12">
@@ -53,7 +95,7 @@
                                     <div class="card-body">
                                         <div class="tab-content" id="custom-tabs-one-tabContent">
                                             <div class="tab-pane fade show active" id="custom-tabs-one-home"
-                                                 role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                                 role="tabpanel" aria-labelledby="cu    stom-tabs-one-home-tab">
                                                 <table id="dataTable"
                                                        class="table custom-table table-bordered table-striped dataTable dtr-inline table-responsive-lg"
                                                        user="grid" aria-describedby="dataTable_info" width="100%">
