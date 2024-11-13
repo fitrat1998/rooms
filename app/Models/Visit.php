@@ -20,6 +20,7 @@ class Visit extends Model
         'registration',
         'registration_start',
         'registration_end',
+        'room_id',
         'bed_id',
         'comment',
         'arrive',

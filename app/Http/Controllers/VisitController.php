@@ -68,6 +68,7 @@ class VisitController extends Controller
             'registration' => $request->reg ?? 'no',
             'registration_start' => $request->reg_start ?? 'empty',
             'registration_end' => $request->reg_end ?? 'empty',
+            'room_id' => $request->room_id,
             'bed_id' => $request->bed_id,
             'comment' => $request->comment,
             'arrive' => $request->arrive,
@@ -134,6 +135,10 @@ class VisitController extends Controller
     public function destroy($id)
     {
         $visit = Visit::find($id);
+
+        $bed = Beds::find($visit->deb_id);
+
+        $bed->delete();
 
         $visit->delete();
 

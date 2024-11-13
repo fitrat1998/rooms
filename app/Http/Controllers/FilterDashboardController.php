@@ -8,6 +8,7 @@ use App\Http\Requests\StoreFilterDashboardRequest;
 use App\Http\Requests\UpdateFilterDashboardRequest;
 use App\Models\Room;
 use App\Models\Visit;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -44,32 +45,27 @@ class FilterDashboardController extends Controller
             $buildings = Building::all();
         }
 
-        $floor = $request->floor;
-
-        $arrive = $request->filled('arrive') ? $request->arrive : null;
-        $leave = $request->filled('leave') ? $request->leave : null;
+        $from = $request->filled('arrive') ? $request->arrive : null;
+        $to = $request->filled('leave') ? $request->leave : null;
 
 
 
+        if ($from && $to) {
 
-        if ($arrive && $leave) {
-            $visits = Visit::where(function ($query) use ($arrive, $leave) {
-                $query->where('arrive', '>', $leave)
-                    ->orWhere('leave', '<', $arrive);
-            })->get();
-
-            $bed_id = $visits->pluck('bed_id');
+            $from = Carbon::createFromFormat('d-m-Y', $from)->format('d-m-Y');
+            $to = Carbon::createFromFormat('d-m-Y', $to)->format('d-m-Y');
+            $visits = Visit::whereBetween('leave', [$from, $to])->get();
         } else {
             $visits = Visit::all();
         }
 
+        $floor = $request->floor;
 
         if (empty($floor)) {
             $rooms = Room::all();
         } else {
             $rooms = Room::where('floor_id', $floor)->get();
         }
-
 
         return view('dashboard', compact('visits', 'rooms', 'buildings'));
     }
