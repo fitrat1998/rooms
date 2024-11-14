@@ -367,5 +367,51 @@ $(document).ready(function () {
     });
 
 
+    if (localStorage.getItem('building')) {
+        $('#building').val(localStorage.getItem('building')).trigger('change');
+    }
+    if (localStorage.getItem('floor')) {
+        $('#floor').val(localStorage.getItem('floor'));
+    }
+
+
+    $('#building').on('change', function () {
+        var buildingId = $(this).val();
+
+
+        localStorage.setItem('building', buildingId);
+
+        h
+        if (buildingId) {
+            $('#floor').prop('disabled', false);
+            updateFloors(buildingId);
+        } else {
+            $('#floor').prop('disabled', true).val('');
+        }
+    });
+
+
+    $('#floor').on('change', function () {
+        var floorId = $(this).val();
+
+
+        localStorage.setItem('floor', floorId);
+    });
+
+
+    function updateFloors(buildingId) {
+        var floors = @json($floors);
+
+
+
+
+        var selectedFloor = localStorage.getItem('floor');
+        if (selectedFloor) {
+            $('#floor').val(selectedFloor);
+        }
+    }
+
+
 });
+
 
