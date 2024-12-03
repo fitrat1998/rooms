@@ -286,6 +286,7 @@ $(document).ready(function () {
 
     $('#building_visit').on('change', function () {
         var buildingId = $(this).val();
+        // alert(1)
         if (buildingId) {
             $.ajax({
                 url: '/floors/' + buildingId,
@@ -381,7 +382,6 @@ $(document).ready(function () {
 
         localStorage.setItem('building', buildingId);
 
-        h
         if (buildingId) {
             $('#floor').prop('disabled', false);
             updateFloors(buildingId);
@@ -400,8 +400,7 @@ $(document).ready(function () {
 
 
     function updateFloors(buildingId) {
-        var floors = @json($floors);
-
+        // var floors = @json($floors)
 
 
 

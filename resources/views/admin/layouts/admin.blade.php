@@ -176,10 +176,10 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
+        <strong>Copyright &copy; 2024 <a href="http://markaz.sampc.uz/" target="_blank">IT-MARKAZ</a>.</strong>
+       Barcha huquqlar himoyalangan.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.2.0
+            <b>Versiya</b> 1.0.0
         </div>
     </footer>
 
@@ -372,12 +372,13 @@
             var url = '{{ route("buildings.show", ":id") }}';
             url = url.replace(':id', buildingId);
 
+
             if (buildingId) {
                 $.ajax({
                     type: 'GET',
                     url: url,
                     success: function (data) {
-                        console.log(data); // Ma'lumotlarni konsolga chiqarish
+                        console.log(data);
                         $('#floors').empty();
                         $('#floors').append('<option value="">Qavatni tanlang</option>');
                         $.each(data, function (key, floor) {

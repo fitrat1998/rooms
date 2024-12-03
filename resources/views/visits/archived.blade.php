@@ -62,7 +62,7 @@
                             @foreach($visits as $visit)
                                 <tr>
                                     <td>{{ $visit->id }}</td>
-                                    <td>{{ $visit->guest_id }}</td>
+                                    <td>{{ $visit->guest->fullname }}</td>
                                     <td>{{ $visit->position }}</td>
                                     <td>{{ $visit->reason }}</td>
                                     <td>

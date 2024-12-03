@@ -67,7 +67,6 @@
                                     <td>{{ $visit->id }}</td>
                                     <td>{{ $visit->guest->fullname }}</td>
 
-                                    <!-- Display truncated text with '...' and add a link to open modal -->
                                     <td>
                                         <span id="position-text">{{ Str::limit($visit->position, 20) }}...</span>
                                         <a href="#" data-toggle="modal" data-target="#positionModal">Ko'proq</a>
@@ -134,17 +133,47 @@
                                         @endif
                                     </td>
                                     <td class="">
-                                        @if($visit == 'yes')
+                                        @if($visit->visa == 'yes')
                                             <span class="btn btn-primary">Mavjud</span>
                                         @else
-                                             <span class="btn btn-danger">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @endif
                                     </td>
-                                    <td class="w-25">{{ $visit->visa_start }}</td>
-                                    <td class="w-25">{{ $visit->visa_end }}</td>
-                                    <td>{{ $visit->registration }}</td>
-                                    <td>{{ $visit->registration_start }}</td>
-                                    <td>{{ $visit->registration_end }}</td>
+                                    <td class="">
+                                        @if($visit->visa_start == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_start }}
+                                        @endif
+                                    </td>
+                                    <td class="w-25">
+                                        @if($visit->visa_end == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_end }}
+                                        @endif
+                                    </td>
+                                    <td class="">
+                                        @if($visit->registration == 'yes')
+                                            <span class="btn btn-primary">Mavjud</span>
+                                        @else
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @endif
+                                    </td>
+                                    <td class="">
+                                        @if($visit->registration_start == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_start }}
+                                        @endif
+                                    </td>
+                                    <td class="w-25">
+                                        @if($visit->registration_end == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_end }}
+                                        @endif
+                                    </td>
                                     <td>{{ $visit->bed($visit->bed_id)->number }}</td>
                                     <td>{{ $visit->room($visit->bed($visit->bed_id)->room_id)->number }}</td>
                                     <!-- Truncated Text with Modal Link for Comment -->
