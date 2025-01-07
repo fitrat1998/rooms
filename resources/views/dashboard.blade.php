@@ -178,13 +178,13 @@
                                                     <tbody>
                                                     @foreach($visits as $visit)
                                                         <tr>
-                                                            <td>{{ $visit->id }}</td>
-                                                            <td>{{ $visit->guest->fullname }}</td>
-                                                            <td>{{ $visit->guest->citizenship->name }}</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->room->number }}</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->number }} - chi</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->room->floor->number }}</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->room->floor->building->name }}</td>
+                                                            <td>{{ $visit->visit_id }}</td>
+                                                            <td>{{ $visit->guest_id }}</td>
+                                                            <td>{{ $visit->guest_id }}</td>
+                                                            <td>{{ $visit->guest_room_id }}</td>
+                                                            <td>{{ $visit->guest_room_id }} - chi</td>
+                                                            <td>{{ $visit->guest_room_id }} - chi</td>
+                                                            <td>{{ $visit->guest_room_id }} - chi</td>
                                                             <td>{{ $visit->arrive }}</td>
                                                             <td>{{ $visit->leave }}</td>
                                                         </tr>
