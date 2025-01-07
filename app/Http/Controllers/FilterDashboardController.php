@@ -12,6 +12,7 @@ use App\Models\Room;
 use App\Models\Visit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class FilterDashboardController extends Controller
@@ -43,11 +44,101 @@ class FilterDashboardController extends Controller
     public function filters(Request $request)
     {
 
+//        $startDate = '2024-11-01';
+//        $endDate = '2024-11-10';
+//
+//        $rooms = DB::table('rooms')
+//            ->leftJoin('visits', function ($join) use ($startDate, $endDate) {
+//                $join->on('rooms.id', '=', 'visits.room_id')
+//                    ->where(function ($query) use ($startDate, $endDate) {
+//                        $query->whereBetween('visits.arrive', [$startDate, $endDate])
+//                            ->orWhereBetween('visits.leave', [$startDate, $endDate])
+//                            ->orWhere(function ($query) use ($startDate, $endDate) {
+//                                $query->where('arrive', '<=', $startDate)
+//                                    ->where('leave', '>=', $endDate);
+//                            });
+//                    });
+//            })
+//            ->select(
+//                'rooms.*',
+//                'visits.*',
+//                DB::raw('CASE WHEN visits.id IS NULL THEN "Bo\'sh" ELSE "Band" END as status')
+//            )
+//            ->get();
+//
+//        dd($rooms);
+
+        $floorId = $request->input('floor');     // floor_id input
+        $buildingId = $request->input('building'); // building_id input
+        $startDate = $request->input('start_date');  // start_date input
+        $endDate = $request->input('end_date');      // end_date input
+
+//        return ($floorId);
+
+        $places = DB::table('beds')
+            ->join('rooms', 'beds.room_id', '=', 'rooms.id')
+            ->join('floors', 'rooms.floor_id', '=', 'floors.id')
+            ->leftJoin('visits', function ($join) use ($startDate, $endDate) {
+                $join->on('beds.id', '=', 'visits.bed_id')
+                    ->where(function ($query) use ($startDate, $endDate) {
+                        if ($startDate && $endDate) {
+                            $query->whereBetween('visits.arrive', [$startDate, $endDate])
+                                ->orWhereBetween('visits.leave', [$startDate, $endDate])
+                                ->orWhere(function ($query) use ($startDate, $endDate) {
+                                    $query->where('arrive', '<=', $startDate)
+                                        ->where('leave', '>=', $endDate);
+                                });
+                        }
+                    });
+            })
+            ->when($floorId, function ($query, $floorId) {
+                return $query->where('rooms.floor_id', $floorId); // floor_id filtr
+            })
+//            ->when($buildingId, function ($query, $buildingId) {
+//                return $query->where('floors.building_id', $buildingId); // building_id filtr
+//            })
+            ->select(
+                'rooms.id as room_id',
+                'rooms.number as room_name',
+                'rooms.floor_id as floor_id',
+                'floors.building_id as building_id',
+                'beds.id as bed_id',
+                'beds.number as bed_name',
+                DB::raw('CASE WHEN visits.id IS NULL THEN "Bo\'sh" ELSE "Band" END as status')
+            )
+            ->get();
+
+        if ($places->isEmpty()) {
+            return response()->json(['message' => 'Hech qanday ma\'lumot topilmadi.'], 404);
+        }
+
+        return response()->json($places);
+
+
+        dd($places);
+
+
         $from = $request->filled('arrive') ? $request->arrive : null;
         $to = $request->filled('leave') ? $request->leave : null;
         $building = $request->filled('building') ? $request->building : null;
 
-        if (!$building) {
+//        dd($building);
+
+        if ($building == null) {
+
+            $visits = Visit::all();
+
+            $rooms = Room::all();
+
+
+            $buildings = Building::all();
+
+
+            return view('dashboard', compact('visits', 'rooms', 'buildings'));
+        }
+
+        if (!$building && $building != null) {
+
 
             $buildings = Building::all();
 
@@ -87,6 +178,7 @@ class FilterDashboardController extends Controller
 
         } elseif ($request->filled('floor')) {
 
+
             if ($floor = $request->floor) {
                 $buildings = $request->filled('building') ? $request->building : null;
 
@@ -125,14 +217,15 @@ class FilterDashboardController extends Controller
 
         } else {
 
+
             $building = $request->filled('building') ? $request->building : null;
 
-            $buildings = Building::where('id',$building)->get();
+            $buildings = Building::where('id', $building)->get();
 
             $buildings_id = $buildings->pluck('id');
 
 
-            $floors = Floor::whereIn('building_id', $buildings_id )->pluck('id');
+            $floors = Floor::whereIn('building_id', $buildings_id)->pluck('id');
 
             $rooms = Room::whereIn('floor_id', $floors);
 
@@ -157,9 +250,9 @@ class FilterDashboardController extends Controller
                 ->pluck('room_id');
 
 
-                $rooms = Room::whereIn('id', $uniqueRoomIds)
-                    ->whereIn('floor_id', $floors)
-                    ->get();
+            $rooms = Room::whereIn('id', $uniqueRoomIds)
+                ->whereIn('floor_id', $floors)
+                ->get();
 
 //            dd(1);
 
@@ -169,37 +262,6 @@ class FilterDashboardController extends Controller
         $buildings = Building::all();
 
         return view('dashboard', compact('visits', 'rooms', 'buildings'));
-
-
-//
-//        if ($from && $to) {
-//
-//            $from = Carbon::createFromFormat('d-m-Y', $from)->format('d-m-Y');
-//            $to = Carbon::createFromFormat('d-m-Y', $to)->format('d-m-Y');
-//
-//            $visits = Visit::whereBetween('leave', [$from, $to])->get();
-//
-//        } else {
-//            $visits = Visit::all();
-//        }
-//
-//        $floor = $request->floor;
-//
-//        $room_ids = $visits->pluck('room_id');
-//
-//        $bed_ids = $visits->pluck('bed_id');
-//
-//        $uniqueRoomIds = Beds::whereNotIn('id', $bed_ids)
-//            ->distinct()
-//            ->pluck('room_id');
-//
-//        if (empty($floor)) {
-//            $rooms = Room::whereIn('id', $uniqueRoomIds)->get();
-//        } else {
-//            $rooms = Room::whereIn('id', $uniqueRoomIds)
-//                ->where('floor_id', $floor)
-//                ->get();
-//        }
 
 
     }

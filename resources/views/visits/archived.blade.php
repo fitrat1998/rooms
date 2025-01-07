@@ -46,9 +46,11 @@
                                 <th class="w-25">Kelish sababi</th>
                                 <th>Tarif</th>
                                 <th>Visa</th>
-                                <th class="w-25">Visa muddati</th>
+                                <th class="w-25">Visa boshlanish vaqti</th>
+                                <th class="w-25">Visa tugash vaqti</th>
                                 <th>Registratsiya</th>
-                                <th class="w-25">Registratsiya muddati</th>
+                                <th class="w-25">Registratsiya boshlanish vaqti</th>
+                                <th class="w-25">Registratsiya tugash vaqti</th>
                                 <th>Joy raqami</th>
                                 <th>Xona</th>
                                 <th>Izoh</th>
@@ -65,17 +67,57 @@
                                     <td>{{ $visit->guest->fullname }}</td>
                                     <td>{{ $visit->position }}</td>
                                     <td>{{ $visit->reason }}</td>
-                                    <td>
+
+                                     <td>
                                         @if($visit->tarif == 'free')
                                             <span class="btn btn-succuss">Bepul</span>
                                         @elseif($visit->tarif == 'paid')
                                             <span class="btn btn-info">Pullik</span>
                                         @endif
                                     </td>
-                                    <td>{{ $visit->visa }}</td>
-                                    <td>{{ $visit->visa_period }}</td>
-                                    <td>{{ $visit->registration }}</td>
-                                    <td>{{ $visit->registration_period }}</td>
+                                    <td class="">
+                                        @if($visit->visa == 'yes')
+                                            <span class="btn btn-primary">Mavjud</span>
+                                        @else
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @endif
+                                    </td>
+                                    <td class="">
+                                        @if($visit->visa_start == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_start }}
+                                        @endif
+                                    </td>
+                                    <td class="w-25">
+                                        @if($visit->visa_end == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_end }}
+                                        @endif
+                                    </td>
+                                    <td class="">
+                                        @if($visit->registration == 'yes')
+                                            <span class="btn btn-primary">Mavjud</span>
+                                        @else
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @endif
+                                    </td>
+                                    <td class="">
+                                        @if($visit->registration_start == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_start }}
+                                        @endif
+                                    </td>
+                                    <td class="w-25">
+                                        @if($visit->registration_end == 'empty')
+                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @else
+                                            {{ $visit->visa_end }}
+                                        @endif
+                                    </td>
+
                                     <td>{{ $visit->bed($visit->bed_id)->number }}</td>
                                     <td>{{ $visit->room($visit->bed($visit->bed_id)->room_id)->number }}</td>
                                     <td>{{ $visit->comment }}</td>
