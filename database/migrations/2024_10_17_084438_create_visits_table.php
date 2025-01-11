@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('registration_start');
             $table->string('registration_end');
             $table->integer('bed_id');
-            $table->integer('comment');
+            $table->text('comment');
             $table->text('arrive');
             $table->text('leave');
             $table->string('status');

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('building_id');
             $table->string('number');
-            $table->text('photo');
+            $table->text('photo')->nullable();
             $table->timestamps();
 
             $table->foreign('building_id')

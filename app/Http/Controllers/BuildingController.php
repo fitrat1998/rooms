@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beds;
 use App\Models\Building;
 use App\Http\Requests\StoreBuildingRequest;
 use App\Http\Requests\UpdateBuildingRequest;
 use App\Models\Floor;
+use App\Models\Room;
+use App\Models\Visit;
 
 class BuildingController extends Controller
 {
@@ -38,6 +41,7 @@ class BuildingController extends Controller
 
         $execute = Building::create([
             'name' => $request->name,
+            'photo' => null,
         ]);
 
         $floors = intval($request->floors);
@@ -45,7 +49,8 @@ class BuildingController extends Controller
         for ($i = 1; $i <= $floors; $i++) {
             $floor = Floor::create([
                 'building_id' => $execute->id,
-                'number' => $i
+                'number' => $i,
+                'photo' => null,
             ]);
         }
 
@@ -60,7 +65,7 @@ class BuildingController extends Controller
     {
         $id = intval($id);
 
-        $floors = Floor::where('building_id',$id)->get();
+        $floors = Floor::where('building_id', $id)->get();
 
         return response()->json($floors);
 
@@ -105,6 +110,7 @@ class BuildingController extends Controller
 
         $building->update([
             'name' => $request->name,
+            'photo' => null,
         ]);
 
 
@@ -118,6 +124,18 @@ class BuildingController extends Controller
     public function destroy($id)
     {
         $building = Building::find($id);
+
+        $floor = Floor::where('building_id', $building->id)->pluck('id');
+
+        $room = Room::whereIn('floor_id', $floor)->pluck('id');
+
+        $bed = Beds::whereIn('room_id', $room)->pluck('id');
+
+        $visit = Visit::whereIn('bed_id', $bed)->get();
+
+        $visit->each(function ($item) {
+            $item->delete();
+        });
 
         $building->delete();
 

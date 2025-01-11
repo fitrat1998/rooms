@@ -12,6 +12,7 @@ class Floor extends Model
     protected $fillable = [
         'building_id',
         'number',
+        'photo'
     ];
 
     public function rooms()

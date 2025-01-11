@@ -13,6 +13,7 @@ class Room extends Model
         'floor_id',
         'number',
         'comment',
+        'status',
     ];
 
 

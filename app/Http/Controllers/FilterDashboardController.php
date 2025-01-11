@@ -160,7 +160,7 @@ class FilterDashboardController extends Controller
         return view('dashboard', compact('visits', 'rooms', 'buildings'));
 
 
-//        dd($places);
+        dd($places);
 
 
         $from = $request->filled('arrive') ? $request->arrive : null;

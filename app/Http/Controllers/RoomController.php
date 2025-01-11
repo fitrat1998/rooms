@@ -45,6 +45,7 @@ class RoomController extends Controller
             'floor_id' => $request->floors,
             'number' => $request->rooms,
             'comment' => $request->comment ?? 'mavjud emas',
+            'status' => 'no',
         ]);
 
         for ($i = 1; $i <= $request->beds; $i++) {
@@ -111,6 +112,7 @@ class RoomController extends Controller
             'floor_id' => $request->floors,
             'number' => $request->rooms,
             'comment' => $request->comment ?? 'mavjud emas',
+            'status' => 'no',
         ]);
 
         if ($request->beds) {

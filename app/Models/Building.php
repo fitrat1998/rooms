@@ -10,7 +10,8 @@ class Building extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'photo',
     ];
 
     public function floors()
