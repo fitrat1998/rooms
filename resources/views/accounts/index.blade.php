@@ -7,18 +7,11 @@
             <div class="row">
                 <div class="card w-100">
                     <div class="card-body">
-                        @if (session('status'))
-                            <div
-                                style="color: green; border: 1px solid green; padding: 10px; margin: 10px 0; border-radius: 5px;">
-                                {{ session('status') }}
-                            </div>
-                    @endif
 
-                    <!-- All columns in one row -->
                         <div class="row">
 
                             <div class="col-md-4">
-                                <!-- Profile Image -->
+
                                 <h3 class="text-center">Profil</h3>
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
@@ -105,29 +98,16 @@
                                 <h3 class="text-center">Akkauntni o'chirish</h3>
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
-                                        <form class="form-horizontal">
+{{--                                        <form method="post" action="{{ route('profile.destroy') }}">--}}
+                                        <form method="post" action="">
+                                            @csrf
+                                            @method('delete')
                                             <div class="form-group row">
-                                                <label for="inputSkills" class="col-sm-4 col-form-label">Skills</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="inputSkills"
-                                                           placeholder="Skills">
+                                                <div class=" justify-content-end">
+                                                    <button type="submit" class="btn btn-danger">O'chirish</button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="offset-sm-4 col-sm-8">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"> I agree to the <a href="#">terms and
-                                                                conditions</a>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="offset-sm-4 col-sm-8">
-                                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                                </div>
-                                            </div>
+
                                         </form>
                                     </div>
                                 </div>

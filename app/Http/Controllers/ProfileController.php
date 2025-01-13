@@ -34,7 +34,8 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('success', 'parol yangilandi');
+
+        return redirect()->route('profile.edit')->with('success', 'parol yangilandi');
     }
 
     /**
