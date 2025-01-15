@@ -177,15 +177,15 @@
                                                     <tbody>
                                                     @foreach($visits as $visit)
                                                         <tr>
-                                                            <td>{{ $visit->id }}</td>
-                                                            <td>{{ $visit->guest->fullname }}</td>
-                                                            <td>{{ $visit->guest->citizenship->name }}</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->room->number }}</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->number }} - chi</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->room->floor->number }}</td>
-                                                            <td>{{ $visit->bed($visit->bed_id)->room->floor->building->name }}</td>
-                                                            <td>{{ $visit->arrive }}</td>
-                                                            <td>{{ $visit->leave }}</td>
+                                                            <td>{{ $visit->id ?? 'mavjud emas' }}</td>
+                                                            <td>{{ $visit->guest->fullname ?? 'mavjud emas'  }}</td>
+                                                            <td>{{ $visit->guest->citizenship->name ??  'mavjud emas' }}</td>
+                                                            <td>{{ $visit->bed($visit->bed_id)->room->number ?? 'mavjud emas'  }}</td>
+                                                            <td>{{ $visit->bed($visit->bed_id)->number ?? '0' }} - chi</td>
+                                                            <td>{{ $visit->bed($visit->bed_id)->room->floor->number ??  'mavjud emas'  }}</td>
+                                                            <td>{{ $visit->bed($visit->bed_id)->room->floor->building->name ?? 'mavjud emas'  }}</td>
+                                                            <td>{{ $visit->arrive ?? 'mavjud emas'  }}</td>
+                                                            <td>{{ $visit->leave ?? 'mavjud emas' }}</td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>

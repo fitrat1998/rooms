@@ -89,6 +89,12 @@ class VisitController extends Controller
     {
         $visit = Visit::find($id);
 
+        $bed = Beds::find($visit->bed_id);
+
+        $bed->update([
+            'status' => 'no'
+        ]);
+
         $visit->update([
             'status' => 'archived'
         ]);

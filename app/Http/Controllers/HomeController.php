@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $tasks = Permission::all();
 
-        $visits = Visit::all();
+        $visits = Visit::where('status','!=','archived')->get();
 
         $rooms = Room::all();
 

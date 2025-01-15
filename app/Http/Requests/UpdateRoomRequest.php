@@ -22,7 +22,10 @@ class UpdateRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'floor_id' => 'required|integer|exists:floors,id',
+            'number' => 'required|integer|min:1|max:1000',
+            'comment' => 'nullable|string|max:255',
+            'status' => 'nullable',
         ];
     }
 }
