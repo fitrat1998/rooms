@@ -47,8 +47,8 @@
                                             <option value="{{ $guest->id }}">{{ $guest->fullname }}</option>
                                         @endforeach
                                     </select>
-                                    @if($errors->has('guest'))
-                                        <span class="error invalid-feedback">{{ $errors->first('guest') }}</span>
+                                    @if($errors->has('guest_id'))
+                                        <span class="text-danger">{{ $errors->first('guest_id') }}</span>
                                     @endif
                                 </div>
 
@@ -58,9 +58,8 @@
                                     <input type="text" name="position"
                                            class="form-control {{ $errors->has('name') ? "is-invalid":"" }}"
                                            value="{{ old('position') }}">
-                                    @if($errors->has('position'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('position') }}</span>
+                                   @if($errors->has('position'))
+                                        <span class="text-danger">{{ $errors->first('position') }}</span>
                                     @endif
                                 </div>
 
@@ -70,9 +69,8 @@
                                     <input type="text" name="reason"
                                            class="form-control {{ $errors->has('name') ? "is-invalid":"" }}"
                                            value="{{ old('reason') }}">
-                                    @if($errors->has('reason'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('reason') }}</span>
+                                   @if($errors->has('reason'))
+                                        <span class="text-danger">{{ $errors->first('reason') }}</span>
                                     @endif
                                 </div>
 
@@ -83,9 +81,8 @@
                                         <option value="free">Bepul</option>
                                         <option value="paid">Pullik</option>
                                     </select>
-                                    @if($errors->has('tarif'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('tarif') }}</span>
+                                   @if($errors->has('tarif'))
+                                        <span class="text-danger">{{ $errors->first('tarif') }}</span>
                                     @endif
                                 </div>
 
@@ -108,8 +105,7 @@
                                                class="form-check-label">Yo`q</label>
                                     </div>
                                     @if($errors->has('visa'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('visa') }}</span>
+                                        <span class="text-danger">{{ $errors->first('visa') }}</span>
                                     @endif
                                 </div>
 
@@ -121,8 +117,8 @@
                                     <input type="text" name="visa_start"
                                            class="form-control {{ $errors->has('visa_start') ? 'is-invalid' : '' }}"
                                            value="{{ old('visa_start') }}">
-                                    @if($errors->has('visa_start'))
-                                        <span class="error invalid-feedback">{{ $errors->first('visa_start') }}</span>
+                                   @if($errors->has('visa_start'))
+                                        <span class="text-danger">{{ $errors->first('visa_start') }}</span>
                                     @endif
 
                                     <h6 style="float: left;">Viza muddati tugashi</h6>
@@ -130,7 +126,7 @@
                                            class="form-control {{ $errors->has('visa_end') ? 'is-invalid' : '' }}"
                                            value="{{ old('visa_end') }}">
                                     @if($errors->has('visa_end'))
-                                        <span class="error invalid-feedback">{{ $errors->first('visa_end') }}</span>
+                                        <span class="text-danger">{{ $errors->first('visa_end') }}</span>
                                     @endif
                                 </div>
 
@@ -143,6 +139,8 @@
                                                class="form-check-input {{ $errors->has('reg') ? 'is-invalid' : '' }}">
                                         <label for="reg_yes"
                                                class="form-check-label">Ha</label>
+
+
                                     </div>
                                     <div
                                         class="form-check form-check-inline float-lg-left">
@@ -152,10 +150,9 @@
                                         <label for="reg_no"
                                                class="form-check-label">Yo`q</label>
                                     </div>
-                                    @if($errors->has('reg'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('reg') }}</span>
-                                    @endif
+                                    @if($errors->has('registration'))
+                                            <span class="text-danger">{{ $errors->first('registration') }}</span>
+                                        @endif
                                 </div>
 
                                 <div><br></div>
@@ -167,7 +164,7 @@
                                            class="form-control {{ $errors->has('reg_start') ? 'is-invalid' : '' }}"
                                            value="{{ old('reg_start') }}">
                                     @if($errors->has('reg_start'))
-                                        <span class="error invalid-feedback">{{ $errors->first('reg_start') }}</span>
+                                        <span class="text-danger">{{ $errors->first('reg_start') }}</span>
                                     @endif
 
                                     <h6 style="float: left;">Registratsiya muddati tugashi</h6>
@@ -175,7 +172,7 @@
                                            class="form-control {{ $errors->has('reg_end') ? 'is-invalid' : '' }}"
                                            value="{{ old('reg_end') }}">
                                     @if($errors->has('reg_end'))
-                                        <span class="error invalid-feedback">{{ $errors->first('reg_end') }}</span>
+                                        <span class="text-danger">{{ $errors->first('reg_end') }}</span>
                                     @endif
                                 </div>
 
@@ -199,15 +196,19 @@
                                 <div class="form-group">
                                     <label for="room">Xonani tanlang</label>
                                     <select id="room_visit" class="form-control select2" name="room_id">
-                                        <option value="">Avval binoni tanlang</option>
+                                        <option value="">Avval qavatni tanlang</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="bed">Joyni tanlang</label>
                                     <select id="bed_visit" class="form-control select2" name="bed_id">
-                                        <option value="">Avval binoni tanlang</option>
+                                        <option value="">Avval xonani tanlang</option>
                                     </select>
+
+                                    @if($errors->has('bed_id'))
+                                        <span class="text-danger">{{ $errors->first('bed_id') }}</span>
+                                    @endif
                                 </div>
 
 
@@ -218,8 +219,7 @@
                                               class="form-control {{ $errors->has('comment') ? "is-invalid":"" }}"
                                               value="{{ old('comment') }}"></textarea>
                                     @if($errors->has('comment'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('comment') }}</span>
+                                        <span class="text-danger">{{ $errors->first('comment') }}</span>
                                     @endif
                                 </div>
 
@@ -229,8 +229,7 @@
                                            class="form-control {{ $errors->has('arrive') ? 'is-invalid' : '' }}"
                                            value="{{ old('arrive') }}">
                                     @if($errors->has('arrive'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('arrive') }}</span>
+                                        <span class="text-danger">{{ $errors->first('arrive') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
@@ -240,8 +239,7 @@
                                            class="form-control {{ $errors->has('leave') ? 'is-invalid' : '' }}"
                                            value="{{ old('leave') }}">
                                     @if($errors->has('leave'))
-                                        <span
-                                            class="error invalid-feedback">{{ $errors->first('leave') }}</span>
+                                        <span class="text-danger">{{ $errors->first('leave') }}</span>
                                     @endif
                                 </div>
 
