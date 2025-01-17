@@ -134,7 +134,7 @@
                                     <h6 class="float-lg-left">Registratsiya</h6><br><br>
                                     <div
                                         class="form-check form-check-inline float-lg-left">
-                                        <input type="radio" id="reg_yes" name="reg"
+                                        <input type="radio" id="reg_yes" name="reg      "
                                                value="yes"
                                                class="form-check-input {{ $errors->has('reg') ? 'is-invalid' : '' }}">
                                         <label for="reg_yes"

@@ -30,6 +30,7 @@
                     <div class="card-body">
                         <form action="{{ route('rooms.store') }}" method="post">
                             @csrf
+
                             <div class="form-group">
                                 <label>Bino tanlang</label>
                                 <select id="building" name="building" class="form-control" required id="building">
@@ -46,37 +47,54 @@
                                     <option value="">Avval binoni tanlang</option>
                                     <!-- AJAX orqali yuklanadi -->
                                 </select>
+                                @if($errors->has('floors'))
+                                    <span class="text-danger">{{ $errors->first('floors') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label>Xona raqami</label>
                                 <input type="number" name="rooms"
-                                       class="form-control {{ $errors->has('floors') ? "is-invalid":"" }}"
+                                       class="form-control @error('rooms') is-invalid @enderror"
                                        value="{{ old('rooms') }}" required>
                                 @if($errors->has('rooms'))
-                                    <span class="error invalid-feedback">{{ $errors->first('rooms') }}</span>
+                                    <span class="text-danger">{{ $errors->first('rooms') }}</span>
                                 @endif
                             </div>
 
                             <div class="form-group">
                                 <label>Joylar soni</label>
                                 <input type="number" name="beds"
-                                       class="form-control {{ $errors->has('floors') ? "is-invalid":"" }}"
+                                       class="form-control @error('beds') is-invalid @enderror"
                                        value="{{ old('beds') }}" required>
-                                @if($errors->has('beds'))
-                                    <span class="error invalid-feedback">{{ $errors->first('beds') }}</span>
+                               @if($errors->has('beds'))
+                                    <span class="text-danger">{{ $errors->first('beds') }}</span>
                                 @endif
                             </div>
 
                             <div class="form-group">
                                 <label>Izoh (majburiy emas)</label>
                                 <textarea name="comment" id="comment"
-                                          class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}">{{ old('comment', isset($guest) ? $guest->comment : '') }}</textarea>
+                                          class="form-control @error('comment') is-invalid @enderror">{{ old('comment') }}</textarea>
                                 @if($errors->has('comment'))
-                                    <span class="error invalid-feedback">{{ $errors->first('comment') }}</span>
+                                    <span class="text-danger">{{ $errors->first('comment') }}</span>
                                 @endif
                             </div>
 
+                            <!-- Xatolik xabarlari (umumiy) -->
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <strong>Xatoliklar mavjud:</strong>
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success float-right">Saqlash</button>
