@@ -103,18 +103,18 @@
                                               <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @endif
                                     </td>
-                                    <td class="">
-                                        @if($visit->registration_start == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                   <td class="">
+                                        @if($visit->registration_start === 'empty')
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
-                                            {{ $visit->visa_start }}
+                                            {{ $visit->registration_start }}
                                         @endif
                                     </td>
                                     <td class="w-25">
-                                        @if($visit->registration_end == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @if($visit->registration_end === 'empty')
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
-                                            {{ $visit->visa_end }}
+                                            {{ $visit->registration_end }}
                                         @endif
                                     </td>
 
