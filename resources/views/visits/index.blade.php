@@ -141,14 +141,14 @@
                                     </td>
                                     <td class="">
                                         @if($visit->visa_start == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
                                             {{ $visit->visa_start }}
                                         @endif
                                     </td>
                                     <td class="w-25">
                                         @if($visit->visa_end == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
                                             {{ $visit->visa_end }}
                                         @endif
@@ -157,23 +157,24 @@
                                         @if($visit->registration == 'yes')
                                             <span class="btn btn-primary">Mavjud</span>
                                         @else
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @endif
                                     </td>
                                     <td class="">
-                                        @if($visit->registration_start == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @if($visit->registration_start === 'empty')
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
-                                            {{ $visit->visa_start }}
+                                            {{ $visit->registration_start }}
                                         @endif
                                     </td>
                                     <td class="w-25">
-                                        @if($visit->registration_end == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @if($visit->registration_end === 'empty')
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
-                                            {{ $visit->visa_end }}
+                                            {{ $visit->registration_start }}
                                         @endif
                                     </td>
+
                                     <td>{{ $visit->bed($visit->bed_id)->number }}</td>
                                     <td>{{ $visit->room($visit->bed($visit->bed_id)->room_id)->number }}</td>
                                     <!-- Truncated Text with Modal Link for Comment -->
