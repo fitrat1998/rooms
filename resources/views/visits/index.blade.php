@@ -141,39 +141,48 @@
                                     </td>
                                     <td class="">
                                         @if($visit->visa_start == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
                                             {{ $visit->visa_start }}
                                         @endif
                                     </td>
                                     <td class="w-25">
                                         @if($visit->visa_end == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
-                                            {{ $visit->visa_end }}
+                                            @if($visit->check_deadline_visa($visit->id) <= 15)
+                                                <span class="btn btn-danger p-1" style="width: 120px!important;">{{ $visit->visa_end }} - ({{$visit->check_deadline_visa($visit->id) }} - kun qoldi)</span>
+                                            @else
+                                                {{ $visit->visa_end }}
+                                            @endif
                                         @endif
                                     </td>
                                     <td class="">
                                         @if($visit->registration == 'yes')
                                             <span class="btn btn-primary">Mavjud</span>
                                         @else
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @endif
                                     </td>
                                     <td class="">
-                                        @if($visit->registration_start == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @if($visit->registration_start === 'empty')
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
-                                            {{ $visit->visa_start }}
+                                            {{ $visit->registration_start }}
                                         @endif
                                     </td>
                                     <td class="w-25">
-                                        @if($visit->registration_end == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                        @if($visit->registration_end === 'empty')
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
-                                            {{ $visit->visa_end }}
+                                            @if($visit->check_deadline_reg($visit->id) <= 15)
+                                                <span class="btn btn-danger p-1">{{ $visit->registration_end }} - ({{$visit->check_deadline_reg($visit->id) }}- kun qoldi)</span>
+                                            @else
+                                                {{ $visit->registration_end }}
+                                            @endif
                                         @endif
                                     </td>
+
                                     <td>{{ $visit->bed($visit->bed_id)->number }}</td>
                                     <td>{{ $visit->room($visit->bed($visit->bed_id)->room_id)->number }}</td>
                                     <!-- Truncated Text with Modal Link for Comment -->
@@ -211,17 +220,9 @@
                                     <td>{{ $visit->leave }}</td>
                                     <td>
                                         {{ $visit->status }}
-                                        {{--                                        @if($visit->status == 'planed')--}}
-                                        {{--                                            <span class="btn btn-warning">Rejalashtirilgan</span>--}}
-                                        {{--                                        @elseif($visit->status == 'now')--}}
-                                        {{--                                            <span class="btn btn-success">Faol</span>--}}
-                                        {{--                                        @endif--}}
                                     </td>
                                     <td class="text-center">
                                         @can('user.delete')
-
-
-
 
                                             <div class="btn-group">
                                                 @can('user.edit')
@@ -235,6 +236,10 @@
                                                     </form>
 
                                                 @endcan
+
+                                                <a href="{{ route('visits.edit',$visit->id) }}" type="button"
+                                                   class="btn btn-primary btn-sm m-1"><i class="fa fa-edit"></i></a>
+
                                                 <form action="{{ route('visits.destroy',$visit->id) }}" method="post">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">

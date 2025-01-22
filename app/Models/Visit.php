@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -51,10 +52,35 @@ class Visit extends Model
     }
 
 
-  public function guest()
-{
-    return $this->belongsTo(Guest::class);
-}
+    public function guest()
+    {
+        return $this->belongsTo(Guest::class);
+    }
+
+    public function check_deadline_reg($id)
+    {
+        $visit = Visit::find($id);
+
+        $registrationEnd = Carbon::parse($visit->registration_end);
+        $now = Carbon::now();
+        $daysLeft = $registrationEnd->diffInDays($now);
+
+        return $daysLeft;
+
+    }
+
+
+    public function check_deadline_visa($id)
+    {
+        $visit = Visit::find($id);
+
+        $visaEnd = Carbon::parse($visit->visa_end);
+        $now = Carbon::now();
+        $daysLeft = $visaEnd->diffInDays($now);
+
+        return $daysLeft;
+
+    }
 
 
 }
