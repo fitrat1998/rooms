@@ -236,6 +236,10 @@
                                                     </form>
 
                                                 @endcan
+
+                                                 <a href="{{ route('visits.edit',$visit->id) }}" type="button"
+                                                           class="btn btn-primary btn-sm m-1"><i class="fa fa-edit"></i></a>
+
                                                 <form action="{{ route('visits.destroy',$visit->id) }}" method="post">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">

@@ -20,7 +20,7 @@ class VisitController extends Controller
 
         $beds = Beds::where('status', 'no')->get();
 
-        $visits = Visit::where('status','!=','archived')->get();
+        $visits = Visit::where('status', '!=', 'archived')->get();
 
         return view('visits.index', compact('guest', 'beds', 'visits'));
     }
@@ -107,14 +107,6 @@ class VisitController extends Controller
      */
     public function show($id)
     {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
         $visit = Visit::where('guest_id', $id)->latest()->first();
 
         $rooms = Beds::where('status', 'no')->get();
@@ -125,13 +117,70 @@ class VisitController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $visit = Visit::find($id);
+
+        $rooms = Beds::where('status', 'no')->get();
+
+        $guests = Guest::all();
+
+        $buildings = Building::all();
+
+        return view('visits.edit', compact('visit', 'rooms', 'guests', 'buildings'));
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateVisitRequest $request, $id)
     {
-        $visit = Visit::find($id);
 
-        return $visit;
+        $visit = Visit::findOrFail($id);
+
+// Prepare the data array
+        $data = [
+            'guest_id' => $request->guest_id,
+            'position' => $request->position ?? null,
+            'reason' => $request->reason ?? null,
+            'tarif' => $request->tarif,
+            'visa' => $request->visa,
+            'visa_start' => $request->visa === 'yes' ? $request->visa_start : null,
+            'visa_end' => $request->visa === 'yes' ? $request->visa_end : null,
+            'registration' => $request->reg,
+            'registration_start' => $request->reg === 'yes' ? $request->reg_start : null,
+            'registration_end' => $request->reg === 'yes' ? $request->reg_end : null,
+            'comment' => $request->comment ?? null,
+            'arrive' => $request->arrive ?? null,
+            'leave' => $request->leave ?? null,
+            'building_id' => $request->building ?? null,
+            'floor_id' => $request->floor_id ?? null,
+            'room_id' => $request->room_id ?? null,
+            'bed_id' => $request->bed_id ?? null,
+        ];
+
+        if ($request->visa !== 'yes') {
+            $data['visa_start'] = 'empty';
+            $data['visa_end'] = 'empty';
+        }
+
+        if ($request->reg !== 'yes') {
+            $data['registration_start'] = 'empty';
+            $data['registration_end'] = 'empty';
+        }
+
+
+        $data = array_filter($data, function ($value) {
+            return !is_null($value);
+        });
+
+        $visit->update($data);
+
+        return redirect()->route('visits.index')->with('success', 'Tashrif muvaffaqiyatli yangilandi.');
+
+
     }
 
 
