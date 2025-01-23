@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Beds;
 use App\Models\Building;
+use App\Models\Floor;
 use App\Models\Guest;
+use App\Models\Room;
 use App\Models\Visit;
 use App\Http\Requests\StoreVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;
@@ -123,13 +125,25 @@ class VisitController extends Controller
     {
         $visit = Visit::find($id);
 
-        $rooms = Beds::where('status', 'no')->get();
+        $bed = Beds::find($visit->bed_id);
 
-        $guests = Guest::all();
+        $room = Room::find($bed->room_id);
+
+        $floor = Floor::find($room->floor_id);
+
+        $building = Building::find($floor->building_id);
+
+        $beds = Beds::all();
+
+        $rooms = Room::all();
+
+        $floors = Floor::all();
 
         $buildings = Building::all();
 
-        return view('visits.edit', compact('visit', 'rooms', 'guests', 'buildings'));
+        $guests = Guest::all();
+
+        return view('visits.edit', compact('visit', 'rooms', 'guests', 'buildings','floors','rooms','beds','building','floor','room','bed'));
     }
 
     /**
@@ -139,6 +153,7 @@ class VisitController extends Controller
     {
 
         $visit = Visit::findOrFail($id);
+
 
 // Prepare the data array
         $data = [
