@@ -379,7 +379,6 @@ $(document).ready(function () {
     $('#building').on('change', function () {
         var buildingId = $(this).val();
 
-
         localStorage.setItem('building', buildingId);
 
         if (buildingId) {
@@ -402,8 +401,6 @@ $(document).ready(function () {
     function updateFloors(buildingId) {
         // var floors = @json($floors)
 
-
-
         var selectedFloor = localStorage.getItem('floor');
         if (selectedFloor) {
             $('#floor').val(selectedFloor);
@@ -412,5 +409,156 @@ $(document).ready(function () {
 
 
 });
+
+
+//edit
+
+//
+// $(document).ready(function () {
+//     // Select2 konfiguratsiyasi
+//     $('.select2').select2({
+//         allowClear: true
+//     });
+//
+//
+//     // Dastlab tanlangan qavatni olish
+//     var selectedFloor = $('#old_floor_id').val(); // Tanlangan qavat ID'si
+//     var selectedRoom = $('#old_room_id').val(); // Tanlangan qavat ID'si
+//     var selectedBed = $('#old_bed_id').val(); // Tanlangan qavat ID'si
+//
+//
+// // Agar buildingId mavjud bo'lsa, qavatlarni yuklash
+//     var buildingId = $('#building_visit_edit').val(); // Tanlangan bina ID'si
+//     if (buildingId) {
+//         updateFloors(buildingId, selectedFloor); // Binoga mos qavatlarni yuklash
+//     }
+//
+// // Binoni tanlaganda ishlovchi hodisa
+//     $('#building_visit_edit').on('change', function () {
+//         var buildingId = $(this).val(); // Tanlangan bina ID'sini olish
+//         if (buildingId) {
+//             selectedFloor = null; // Eski tanlovni tozalash
+//             updateFloors(buildingId, selectedFloor); // Binoga mos qavatlarni yuklash
+//         } else {
+//             clearSelections(); // Tanlashlarni tozalash
+//         }
+//     });
+//
+// // Qavatlarni yuklash funksiyasi
+//     function updateFloors(buildingId, selectedFloor) {
+//         $.ajax({
+//             url: '/floors/' + buildingId,
+//             type: 'GET',
+//             dataType: 'json',
+//             success: function (data) {
+//                 var $floorSelect = $('#floor_visit_edit');
+//                 $floorSelect.empty().append('<option value="">Qavatni tanlang</option>');
+//
+//                 $.each(data, function (key, value) {
+//                     var isSelected = selectedFloor == value.id ? 'selected' : ''; // Tanlangan qavatni ko'rsatish
+//                     $floorSelect.append('<option value="' + value.id + '" ' + isSelected + '>' + value.number + '</option>');
+//                 });
+//
+//                 // Tanlangan qavatni faollashtirish
+//                 if (selectedFloor) {
+//                     $floorSelect.val(selectedFloor).trigger('change');
+//                 }
+//             },
+//             error: function () {
+//                 console.error('Qavatlar yuklashda xatolik yuz berdi.');
+//             }
+//         });
+//     }
+//
+//     $('#floor_visit_edit').on('change', function () {
+//         selectedFloor = $(this).val(); // Tanlangan qavatni yangilash
+//     });
+//
+//     if (selectedFloor) {
+//         updateRooms(selectedFloor); // Binoga mos qavatlarni yuklash
+//     }
+//
+//     // Xonalarni yangilash funksiyasi
+//     function updateRooms(floorId) {
+//         $.ajax({
+//             url: '/rooms/getrooms/' + floorId, // Backendga AJAX so'rov yuboriladi
+//             type: 'GET',
+//             dataType: 'json',
+//             success: function (data) {
+//                 var selectedRoom = $('input[name="old_room_id"]').val(); // old_room_id qiymatini olish
+//                 $('#room_visit_edit').empty().append('<option value="">Xonani tanlang</option>');
+//                 $.each(data, function (key, value) {
+//                     var isSelected = selectedRoom == value.id ? 'selected' : ''; // Tanlangan xona
+//                     $('#room_visit_edit').append('<option value="' + value.id + '" ' + isSelected + '>' + value.number + '</option>');
+//                 });
+//
+//                 if (selectedRoom) {
+//                     $('#room_visit_edit').val(selectedRoom).trigger('change'); // Tanlangan xonani qaytarish
+//                 }
+//             },
+//             error: function () {
+//                 console.error('Xonalarni yuklashda xatolik yuz berdi.');
+//             }
+//         });
+//     }
+//
+//     $('#room_visit_edit').on('change', function () {
+//         selectedRoom = $(this).val(); // Tanlangan qavatni yangilash
+//     });
+//
+//     if (selectedRoom) {
+//         updateBeds(selectedRoom); // Binoga mos qavatlarni yuklash
+//     }
+//
+//     console.log(selectedBed);
+//
+//     function updateBeds(roomId) {
+//         $.ajax({
+//             url: '/beds/' + roomId,
+//             type: 'GET',
+//             dataType: 'json',
+//             success: function (data) {
+//                 console.log('Keltirilgan joylar:', data);
+//
+//                 if (!data || data.length === 0) {
+//                     console.error('Joylar bo\'sh.');
+//                     return;
+//                 }
+//
+//                 var $bedSelect = $('#bed_visit_edit');
+//                 $bedSelect.empty().append('<option value="">Joyni tanlang</option>');
+//
+//                 $.each(data, function (key, value) {
+//                     var isSelected = selectedBed == value.id ? 'selected' : '';
+//                     $bedSelect.append('<option value="' + value.id + '" ' + isSelected + '>' + value.number + '</option>');
+//                 });
+//
+//                 if (selectedBed) {
+//                     $bedSelect.val(selectedBed).trigger('change');
+//                 } else {
+//                     console.log('Tanlangan joy mavjud emas.');
+//                 }
+//             },
+//             error: function (xhr, status, error) {
+//                 console.error('Joylarni yuklashda xatolik yuz berdi:', xhr.responseText || error);
+//             }
+//         });
+//     }
+//
+//     $('#bed_visit_edit').on('change', function () {
+//         var selectedBed = $(this).val(); // Tanlangan bed ID'sini olish
+//         $('#old_bed_id').val(selectedBed); // old_bed_id inputini yangilash
+//     });
+//
+//
+//     // Selectlarni tozalash funksiyasi
+//     function clearSelections() {
+//         $('#floor_visit_edit').empty().append('<option value="">Avval binoni tanlang</option>');
+//         $('#room_visit_edit').empty().append('<option value="">Avval qavatni tanlang</option>');
+//         $('#bed_visit_edit').empty().append('<option value="">Avval xonani tanlang</option>');
+//     }
+//
+// });
+
 
 

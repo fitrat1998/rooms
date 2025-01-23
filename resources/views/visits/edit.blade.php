@@ -166,39 +166,46 @@
 
 
                             <div class="form-group">
-                                <label for="building">Binoni tanlang</label>
+                                <label for="building">Binoni tanlang - <b class="text-success">({{ $building->name }})</b></label>
                                 <select id="building_visit" class="form-control select2" name="building">
                                     <option value="">Bino tanlang</option>
-                                    @foreach($buildings as $building)
-                                        <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                    @foreach($buildings as $build)
+                                        <option value="{{ $build->id }}"
+                                           >
+                                            {{ $build->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="floor">Qavatni tanlang</label>
+                                <input type="hidden" id="old_floor_id" value="{{ $floor->id ?? '' }}" name="old_floor_id">
+
+                                <label for="floor">Qavatni tanlang - <b class="text-success">({{ $floor->number }} - qavat)</b></label>
                                 <select id="floor_visit" class="form-control select2" name="floor_id">
                                     <option value="">Avval binoni tanlang</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="room">Xonani tanlang</label>
+                                <input type="hidden" value="{{ isset($room) ? $room->id : '' }}" name="old_room_id" id="old_room_id">
+                                <label for="room">Xonani tanlang  - <b class="text-success">({{ $room->number }} - xona)</b></label>
                                 <select id="room_visit" class="form-control select2" name="room_id">
                                     <option value="">Avval qavatni tanlang</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="bed">Joyni tanlang</label>
+                                <input type="hidden" value="{{ isset($visit) ? $visit->bed_id : '' }}" name="old_bed_id" id="old_bed_id">
+                                <label for="bed">Joyni tanlang  - <b class="text-success">({{ $bed->number }} - joy)</b></label>
                                 <select id="bed_visit" class="form-control select2" name="bed_id">
                                     <option value="">Avval xonani tanlang</option>
                                 </select>
-
                                 @if($errors->has('bed_id'))
                                     <span class="text-danger">{{ $errors->first('bed_id') }}</span>
                                 @endif
                             </div>
+
 
                             <div class="form-group">
                                 <h6 class="float-lg-left">Izoh</h6>
