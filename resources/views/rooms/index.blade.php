@@ -82,7 +82,21 @@
                                     <td class="w-25">{{ $room->number }}</td>
 
                                     <td class="w-25">
-                                        <span class="btn btn-success">{{ count($room->beds) }}</span>
+                                        @foreach($room->beds as $bed)
+                                            @if($bed->status == 'no')
+                                                <span
+                                                    class="btn btn-primary">{{ $bed->number }}</span>
+                                            @elseif($bed->status == 'empty')
+                                                @if(!request()->has('arrive') && !request()->has('leave'))
+                                                    <span
+                                                        class="btn btn-danger">{{ $bed->number }}</span>
+                                                @else
+                                                    <span class=""></span>
+                                                @endif
+
+
+                                            @endif
+                                        @endforeach
                                     </td>
 
                                     <td class="w-25">
