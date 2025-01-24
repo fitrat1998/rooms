@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('citizenships', CitizenshipController::class);
     Route::get('visits/archived', [VisitController::class, 'archived'])->name('visits.archived');
     Route::resource('visits', VisitController::class);
+    Route::delete('visits/{id}/deletearchive', [VisitController::class, 'deletearchive'])->name('visits.deletearchive');
     Route::put('visits/accept/{guest}', [VisitController::class, 'accept'])->name('visits.accept');
 
     Route::match(['get', 'post'], 'filterdashboard/filters', [FilterDashboardController::class, 'filters'])->name('filterdashboard.filters');

@@ -57,7 +57,7 @@
                                 <th class="w-25">Kelish sanasi</th>
                                 <th class="w-25">Qaytib ketish sanasi</th>
                                 <th class="w-25">Status</th>
-{{--                                <th class="w-25">Amallar</th>--}}
+                                <th class="w-25">Amallar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,7 +68,7 @@
                                     <td>{{ $visit->position }}</td>
                                     <td>{{ $visit->reason }}</td>
 
-                                     <td>
+                                    <td>
                                         @if($visit->tarif == 'free')
                                             <span class="btn btn-succuss">Bepul</span>
                                         @elseif($visit->tarif == 'paid')
@@ -84,14 +84,14 @@
                                     </td>
                                     <td class="">
                                         @if($visit->visa_start == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
                                             {{ $visit->visa_start }}
                                         @endif
                                     </td>
                                     <td class="w-25">
                                         @if($visit->visa_end == 'empty')
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
                                             {{ $visit->visa_end }}
                                         @endif
@@ -100,10 +100,10 @@
                                         @if($visit->registration == 'yes')
                                             <span class="btn btn-primary">Mavjud</span>
                                         @else
-                                              <span class="btn btn-danger p-1">Mavjud emas</span>
+                                            <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @endif
                                     </td>
-                                   <td class="">
+                                    <td class="">
                                         @if($visit->registration_start === 'empty')
                                             <span class="btn btn-danger p-1">Mavjud emas</span>
                                         @else
@@ -125,40 +125,25 @@
                                     <td>{{ $visit->leave }}</td>
                                     <td>
                                         Arxivlangan
-{{--                                        @if($visit->status == 'planed')--}}
-{{--                                            <span class="btn btn-warning">Rejalashtirilgan</span>--}}
-{{--                                        @elseif($visit->status == 'now')--}}
-{{--                                            <span class="btn btn-success">Faol</span>--}}
-{{--                                        @endif--}}
+                                        {{--                                        @if($visit->status == 'planed')--}}
+                                        {{--                                            <span class="btn btn-warning">Rejalashtirilgan</span>--}}
+                                        {{--                                        @elseif($visit->status == 'now')--}}
+                                        {{--                                            <span class="btn btn-success">Faol</span>--}}
+                                        {{--                                        @endif--}}
                                     </td>
-{{--                                    <td class="text-center">--}}
-{{--                                        @can('user.delete')--}}
-
-
-
-
-{{--                                            <div class="btn-group">--}}
-{{--                                                @can('user.edit')--}}
-{{--                                                    <form action="{{ route('visits.accept', $visit->id) }}"--}}
-{{--                                                          method="POST">--}}
-{{--                                                        @csrf--}}
-{{--                                                        @method('PUT')--}}
-{{--                                                        <button type="submit" class="btn btn-primary btn-sm m-1">--}}
-{{--                                                            <i class="fa-regular fa-square-caret-down"></i>--}}
-{{--                                                        </button>--}}
-{{--                                                    </form>--}}
-
-{{--                                                @endcan--}}
-{{--                                                <form action="{{ route('visits.destroy',$visit->id) }}" method="post">--}}
-{{--                                                    @csrf--}}
-{{--                                                    <input name="_method" type="hidden" value="DELETE">--}}
-{{--                                                    <button type="button" class="btn btn-danger btn-sm m-1"--}}
-{{--                                                            onclick="if (confirm('Вы уверены?')) { this.form.submit() } ">--}}
-{{--                                                        <i class="fa fa-trash"></i></button>--}}
-{{--                                                </form>--}}
-{{--                                            </div>--}}
-{{--                                        @endcan--}}
-{{--                                    </td>--}}
+                                    <td class="text-center">
+                                        @can('user.delete')
+                                            <div class="btn-group">
+                                                <form action="{{ route('visits.deletearchive',$visit->id) }}" method="post">
+                                                    @csrf
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button type="button" class="btn btn-danger btn-sm m-1"
+                                                            onclick="if (confirm('Вы уверены?')) { this.form.submit() } ">
+                                                        <i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        @endcan
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

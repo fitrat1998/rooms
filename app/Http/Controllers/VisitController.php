@@ -198,6 +198,17 @@ class VisitController extends Controller
 
     }
 
+    public function deletearchive($id)
+    {
+        $visit = Visit::where('id',$id)
+        ->where('status','archived')
+        ->first();
+
+        $visit->delete();
+
+        return redirect()->route('visits.archived')->with('success', 'Ma`lumot muvaffaqiyatli o`chirildi');
+    }
+
 
     /**
      * Remove the specified resource from storage.
