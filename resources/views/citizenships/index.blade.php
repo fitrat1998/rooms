@@ -48,7 +48,7 @@
                             <tbody>
                             @foreach($citizenships as $citizenship)
                                 <tr>
-                                    <td>{{ $citizenship->id }}</td>
+                                    <td>{{ $loop->iteration ?? 'mavjud emas'  }}</td>
                                     <td>{{ $citizenship->    name }}</td>
                                     <td class="text-center">
                                         @can('user.delete')
