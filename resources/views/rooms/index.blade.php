@@ -77,7 +77,7 @@
                             <tbody>
                             @foreach($rooms as $room)
                                 <tr>
-                                    <td class="w-25">{{ $room->id }}</td>
+                                    <td>{{ $loop->iteration ?? 'mavjud emas'  }}</td>
 
                                     <td class="w-25">{{ $room->number }}</td>
 

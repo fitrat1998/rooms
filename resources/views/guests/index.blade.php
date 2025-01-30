@@ -50,7 +50,7 @@
                             <tbody>
                             @foreach($guests as $guest)
                                 <tr>
-                                    <td>{{ $guest->id }}</td>
+                                    <td>{{ $loop->iteration ?? 'mavjud emas'  }}</td>
                                     <td>{{ $guest->fullname }}</td>
                                     <td>{{ $guest->passport_number }}</td>
                                     <td>{{ $guest->citizenship->name ?? 'mavjud emas'}}</td>

@@ -64,7 +64,7 @@
 
                             @foreach($visits as $visit)
                                 <tr>
-                                    <td>{{ $visit->id }}</td>
+                                    <td>{{ $loop->iteration ?? 'mavjud emas'  }}</td>
                                     <td>{{ $visit->guest->fullname }}</td>
 
                                     <td>

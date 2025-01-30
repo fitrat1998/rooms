@@ -49,7 +49,7 @@
                             <tbody>
                             @foreach($buildings as $building)
                                 <tr>
-                                    <td>{{ $building->id }}</td>
+                                    <td>{{ $loop->iteration ?? 'mavjud emas'  }}</td>
                                     <td>{{ $building->name }}</td>
                                     <td class="w-25">
                                         <span class="btn btn-success">{{ count($building->floors) }}</span>

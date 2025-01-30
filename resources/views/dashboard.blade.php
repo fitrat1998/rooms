@@ -123,7 +123,7 @@
                                                         <tbody>
                                                         @foreach($rooms as $room)
                                                             <tr>
-                                                                <td>{{ $room->id }}</td>
+                                                                <td>{{ $loop->iteration }}</td>
                                                                 <td class="w-25">{{ $room->floor->building->name }}</td>
                                                                 <td class="w-25"><span
                                                                         class="btn btn-success">{{ $room->floor->number }}</span>
@@ -177,7 +177,7 @@
                                                     <tbody>
                                                     @foreach($visits as $visit)
                                                         <tr>
-                                                            <td>{{ $visit->id ?? 'mavjud emas' }}</td>
+                                                            <td>{{ $loop->iteration ?? 'mavjud emas'  }}</td>
                                                             <td>{{ $visit->guest->fullname ?? 'mavjud emas'  }}</td>
                                                             <td>{{ $visit->guest->citizenship->name ??  'mavjud emas' }}</td>
                                                             <td>{{ $visit->bed($visit->bed_id)->room->number ?? 'mavjud emas'  }}</td>

@@ -63,7 +63,7 @@
                             <tbody>
                             @foreach($visits as $visit)
                                 <tr>
-                                    <td>{{ $visit->id }}</td>
+                                    <td>{{ $loop->iteration ?? 'mavjud emas'  }}</td>
                                     <td>{{ $visit->guest->fullname }}</td>
                                     <td>{{ $visit->position }}</td>
                                     <td>{{ $visit->reason }}</td>
@@ -133,15 +133,15 @@
                                     </td>
                                     <td class="text-center">
                                         @can('user.delete')
-                                            <div class="btn-group">
-                                                <form action="{{ route('visits.deletearchive',$visit->id) }}" method="post">
-                                                    @csrf
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <button type="button" class="btn btn-danger btn-sm m-1"
-                                                            onclick="if (confirm('Вы уверены?')) { this.form.submit() } ">
-                                                        <i class="fa fa-trash"></i></button>
-                                                </form>
-                                            </div>
+{{--                                            <div class="btn-group">--}}
+{{--                                                <form action="{{ route('visits.deletearchive',$visit->id) }}" method="post">--}}
+{{--                                                    @csrf--}}
+{{--                                                    <input name="_method" type="hidden" value="DELETE">--}}
+{{--                                                    <button type="button" class="btn btn-danger btn-sm m-1"--}}
+{{--                                                            onclick="if (confirm('Вы уверены?')) { this.form.submit() } ">--}}
+{{--                                                        <i class="fa fa-trash"></i></button>--}}
+{{--                                                </form>--}}
+{{--                                            </div>--}}
                                         @endcan
                                     </td>
                                 </tr>
