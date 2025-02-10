@@ -181,7 +181,7 @@
                                                 {{ $visit->registration_end }}
                                             @endif
                                         @endif
-                                    </td
+                                    </td>
 
                                     <td>
                                         {{ optional($visit->bed($visit->bed_id))->number ?? 'mavjud emas' }}
