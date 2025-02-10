@@ -181,10 +181,17 @@
                                                 {{ $visit->registration_end }}
                                             @endif
                                         @endif
-                                    </td>
+                                    </td
+                                 
+                              <td>
+    {{ optional($visit->bed($visit->bed_id))->number ?? 'mavjud emas' }}
+</td>
 
-                                    <td>{{ $visit->bed($visit->bed_id)->number ?? 'mavjud emas' }}</td>
-                              <td>{{ $visit->room($visit->bed($visit->bed_id)->room_id)->number ?? 'mavjud emas' }}</td>
+<td>
+    {{ optional($visit->room(optional($visit->bed($visit->bed_id))->room_id))->number ?? 'mavjud emas' }}
+</td>
+
+>>>>>>> 074a75137bbc0381576866e7963cad1c6ee32f83
                                     <!-- Truncated Text with Modal Link for Comment -->
                                     <td>
                                         <span id="comment-text">{{ Str::limit($visit->comment, 20) }}...</span>
