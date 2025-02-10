@@ -183,8 +183,14 @@
                                         @endif
                                     </td>
 
-                                    <td>{{ $visit->bed($visit->bed_id)->number }}</td>
-                                    <td>{{ $visit->room($visit->bed($visit->bed_id)->room_id)->number }}</td>
+                                  <td>
+    {{ optional($visit->bed($visit->bed_id))->number ?? 'mavjud emas' }}
+</td>
+
+<td>
+    {{ optional($visit->room(optional($visit->bed($visit->bed_id))->room_id))->number ?? 'mavjud emas' }}
+</td>
+
                                     <!-- Truncated Text with Modal Link for Comment -->
                                     <td>
                                         <span id="comment-text">{{ Str::limit($visit->comment, 20) }}...</span>
