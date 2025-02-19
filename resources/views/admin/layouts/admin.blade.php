@@ -269,6 +269,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <!-- Custom Script -->
 <script src="{{ asset('plugins/my/self.js')}}"></script>
@@ -553,6 +555,43 @@
     });
 
 
+</script>
+
+<script>
+    function confirmAccept(visitId) {
+        Swal.fire({
+            title: 'Ishonchingiz komilmi?',
+            text: "Siz haqiqatdan ham shu tashrifni arxivga olmoqchimisiz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ha, arxivga o‘tkaz!',
+            cancelButtonText: 'Bekor qilish'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('acceptVisitForm' + visitId).submit();
+            }
+        });
+    }
+</script>
+
+<script>
+    $('#commentModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var comment = button.data('comment') || 'Izoh mavjud emas';
+        var modal = $(this);
+        modal.find('.modal-body').text(comment);
+    });
+</script>
+<!-- JavaScript -->
+<script>
+    $('#reasonModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Modalni ochgan tugma
+        var reason = button.data('reason') || 'Sabab mavjud emas';
+        var modal = $(this);
+        modal.find('#full-reason').text(reason);
+    });
 </script>
 
 

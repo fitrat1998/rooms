@@ -71,9 +71,14 @@
                                         <span id="position-text">{{ Str::limit($visit->position, 20) }}...</span>
                                         <a href="#" data-toggle="modal" data-target="#positionModal">Ko'proq</a>
                                     </td>
+
                                     <td>
-                                        <span id="reason-text">{{ Str::limit($visit->reason, 20) }}...</span>
-                                        <a href="#" data-toggle="modal" data-target="#reasonModal">Ko'proq</a>
+                                        <span
+                                            id="reason-text-{{ $visit->id }}">{{ Str::limit($visit->reason, 20) }}...</span>
+                                        <a href="#" data-toggle="modal" data-target="#reasonModal"
+                                           data-reason="{{ $visit->reason }}">
+                                            Ko'proq
+                                        </a>
                                     </td>
 
                                     <!-- Modal for Position -->
@@ -100,10 +105,10 @@
                                         </div>
                                     </div>
 
-                                    <!-- Modal for Reason -->
+                                    <!-- Universal Modal for Reason -->
                                     <div class="modal fade" id="reasonModal" tabindex="-1" role="dialog"
                                          aria-labelledby="reasonLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-lg" role="document"> <!-- Katta modal -->
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="reasonLabel">Sabab</h5>
@@ -112,8 +117,9 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">
-                                                    {{ $visit->reason }}
+                                                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                                                    <!-- Scroll qo‘shildi -->
+                                                    <span id="full-reason">Sabab yuklanmoqda...</span>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -194,11 +200,12 @@
 
                                     <!-- Truncated Text with Modal Link for Comment -->
                                     <td>
-                                        <span id="comment-text">{{ Str::limit($visit->comment, 20) }}...</span>
-                                        <a href="#" data-toggle="modal" data-target="#commentModal">Ko'proq</a>
+                                        <span id="comment-text-{{ $visit->id }}">{{ Str::limit($visit->comment, 20) }}...</span>
+                                        <a href="#" data-toggle="modal" data-target="#commentModal"
+                                           data-comment="{{ $visit->comment }}">Ko'proq</a>
                                     </td>
 
-                                    <!-- Modal for Comment -->
+                                    <!-- Modal -->
                                     <div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
                                          aria-labelledby="commentLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -211,7 +218,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    {{ $visit->comment }}
+                                                    <span id="full-comment">Izoh yuklanmoqda...</span>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -233,11 +240,13 @@
 
                                             <div class="btn-group">
                                                 @can('user.edit')
-                                                    <form action="{{ route('visits.accept', $visit->id) }}"
+                                                    <form id="acceptVisitForm{{ $visit->id }}"
+                                                          action="{{ route('visits.accept', $visit->id) }}"
                                                           method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-primary btn-sm m-1">
+                                                        <button type="button" onclick="confirmAccept({{ $visit->id }})"
+                                                                class="btn btn-primary btn-sm m-1">
                                                             <i class="fa-regular fa-square-caret-down"></i>
                                                         </button>
                                                     </form>
