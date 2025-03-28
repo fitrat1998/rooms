@@ -82,5 +82,17 @@ class Visit extends Model
 
     }
 
+     public function check_deadline_leave($id)
+    {
+        $visit = Visit::find($id);
+
+        $visaEnd = Carbon::parse($visit->leave);
+        $now = Carbon::now();
+        $daysLeft = $visaEnd->diffInDays($now);
+
+        return $daysLeft;
+
+    }
+
 
 }

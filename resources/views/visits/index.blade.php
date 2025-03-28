@@ -231,7 +231,14 @@
 
 
                                     <td>{{ $visit->arrive }}</td>
-                                    <td>{{ $visit->leave }}</td>
+{{--                                    {{ dd($visit->check_deadline_leave($visit->id) ) }}--}}
+                                    <td>
+                                         @if($visit->check_deadline_leave($visit->id) <= 5)
+                                                <span class="btn btn-danger p-1" style="width: 120px!important;">{{ $visit->leave }} - ({{$visit->check_deadline_leave($visit->id) }} - kun qoldi)</span>
+                                            @else
+                                                {{ $visit->leave }}
+                                            @endif
+                                    </td>
                                     <td>
                                         {{ $visit->status }}
                                     </td>
